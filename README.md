@@ -39,16 +39,16 @@ The following JSOND describes a person with a name, an age, if the person is stu
 **person.json**
 ```
 {
-	"name":"string",
-	"age":"number",
-	"student":"boolean",
-	"hobbies":[
-		"string"
-	],
-	"parents":{
-		"father":"person",
-		"mother":"person",
-	}
+    "name": "string",
+    "age": "number",
+    "student": "boolean",
+    "hobbies": [
+        "string"
+    ],
+    "parents": {
+        "father": "person",
+        "mother": "person"
+    }
 }
 ```
 
