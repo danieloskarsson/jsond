@@ -36,7 +36,7 @@ Before we get in to the example there are two more points worth mentioning:
 
 The following JSOND describes a person with a name, an age, if the person is student or not, a list of hobbies, and who the persons parents are.
 
-**person.json**
+**person.jsond**
 ```
 {
     "name": "string",
