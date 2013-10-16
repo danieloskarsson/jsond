@@ -1,9 +1,8 @@
-
-## Introduction
+# Introduction
 
 JSOND, _may also be written as_ jsond, is a way of defining JSON using JSON. The object being defined is created using json where values are either a nested object, an array, or a string representing the data type.
 
-### JSON
+## JSON
 
 Let's recap JSON basics. JSON is built on two structures:
 
@@ -20,7 +19,7 @@ In JSON, a value must be one of the following:
 - false
 - null
 
-### Types
+## Types
 
 Based on the valid values JSOND simply defines the following types:
 
@@ -28,7 +27,7 @@ Based on the valid values JSOND simply defines the following types:
 - "number"
 - "boolean"
 
-### An illustrative example
+## An illustrative example
 
 The following JSOND defines a person with a name, an age, whether the person is student or not, the persons favorite artist and team, and a list of hobbies.
 
@@ -48,7 +47,7 @@ The following JSOND defines a person with a name, an age, whether the person is 
 
 The types "string", "number", and "boolean" is used to define the first three properties name, age and student. The nested favorites object is defined as having two properties artist and team, both of the type "string". The property hobbies is defined as an array.
 
-### Optional properties
+## Optional properties
 
 Properties can be defined as optional. Below the previous example has been enhanced so that the age number, favorites object and hobbies array are optional.
 
@@ -68,7 +67,7 @@ Properties can be defined as optional. Below the previous example has been enhan
 
 Properties that are defined as optional may either be missing, defined as null, or contain a value of the defined type.
 
-### Custom types
+## Custom types
 
 As long as JSOND can parse the type, any user-defined JSOND is valid as type. The name of the JSOND structure is used as the type name. In the example below favorites has been defined in a structure named favorites.
 
@@ -112,11 +111,11 @@ Recursive type definitions are allowed.
 
 In the example above there is an additional object defined with the name "parents". The properties of the object is father and mother which is defined as having the type "person", which is a reference to the name of the overall structure.
 
-## Value definitions
+# Value definitions
 
 In addition to define types, JSOND can also be used to define valid strings, numbers, and content of arrays. Value definitions appear after the type definition separated with a colon. When no value definition is supplied any value of the correct type is considered as valid value.
 
-### Strings
+## Strings
 
 Strings are value defined using regular expressions.
 
@@ -130,7 +129,7 @@ Strings are value defined using regular expressions.
 
 In the example above the value of status may be either "OK", or "FAILURE" and the value of utc is a valid UTC timestamp with up to six fractions.
 
-### Numbers
+## Numbers
 
 Numbers are defined using one or more ranges. A range consists of two numbers separated with a comma within brackets. E.g. {18,99} defines any integer that is equal to or greater than 18 _and_ less than or equal to 99. There are three types of brackets:
 
@@ -144,11 +143,11 @@ A range can be left open by omitting one of the number. E.g. {18,} defines any i
 
 Multiple ranges can be combined. E.g. (,0),(0,) defines any positive or negative number except zero.
 
-### Arrays
+## Arrays
 
 The type of values inside an array can be defined. E.g. ["string"] defines that the array should only consist of strings.
 
-### An enhanced example
+## An enhanced example
 
 The following example is an enhanced version of the previous example, enhanced with value definitions.
 
@@ -170,7 +169,7 @@ The following example is an enhanced version of the previous example, enhanced w
 
 The value of name is defined to contain a string with at least two characters. The age of a person is defined to be at least 18 years old, and cannot be 18.5. The property hobbies is defined as an array of strings.
 
-## Comments
+# Comments
 
 JSOND support comments inside the JSON structure. Comments can be made in relation to both the name and value.
 
