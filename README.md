@@ -1,7 +1,7 @@
 
 ## Introduction
 
-JSOND, _may also be written as_ jsond, is a way of defining a named json object using _json_. The object being defined is created using json where values are either a nested object, an array, or a string representing the data type.
+JSOND, _may also be written as_ jsond, is a way of defining JSON using JSON. The object being defined is created using json where values are either a nested object, an array, or a string representing the data type.
 
 ### JSON
 
