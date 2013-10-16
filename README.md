@@ -35,14 +35,14 @@ The following JSOND defines a person with a name, an age, whether the person is 
 **person.jsond**
 ```
 {
-    "name": "string",
-    "age": "number",
-    "student": "boolean",
-    "favorites": {
-	"artist": "string",
-	"team": "string"
-    },
-    "hobbies": []
+	"hobbies": [],
+	"favorites": {
+		"team": "string",
+		"artist": "string"
+	},
+	"student": "boolean",
+	"age": "number",
+	"name": "string"
 }
 ```
 
@@ -55,14 +55,14 @@ Properties can be defined as optional. Below the previous example has been enhan
 **person.jsond**
 ```
 {
-    "name": "string",
-    "age:optional": "number",
-    "student": "boolean",
-    "favorites:optional": {
-	"artist": "string",
-	"team": "string"
-    },
-    "hobbies:optional": []
+	"hobbies:optional": [],
+	"favorites:optional": {
+		"team": "string",
+		"artist": "string"
+	},
+	"student": "boolean",
+	"age:optional": "number",
+	"name": "string"
 }
 ```
 
@@ -75,19 +75,19 @@ As long as JSOND can parse the type, any user-defined JSOND is valid as type. Th
 **favorites.jsond**
 ```
 {
-    "artist": "string",
-    "team": "string"
+	"team": "string",
+	"artist": "string"
 }
 ```
 
 **person.jsond**
 ```
 {
-    "name": "string",
-    "age": "number",
-    "student": "boolean",
-    "favorites": "favorites",
-    "hobbies": []
+	"hobbies": [],
+	"favorites": "favorites",
+	"student": "boolean",
+	"age": "number",
+	"name": "string"
 }
 ```
 
@@ -98,15 +98,15 @@ Recursive type definitions are allowed.
 **person.jsond**
 ```
 {
-    "name": "string",
-    "age": "number",
-    "student": "boolean",
-    "favorites": "favorites",
-    "hobbies": [],
-    "parents": {
-        "father": "person",
-        "mother": "person"
-    }
+	"parents": {
+		"mother": "person",
+		"father": "person"
+	},
+	"hobbies": [],
+	"favorites": "favorites",
+	"student": "boolean",
+	"age": "number",
+	"name": "string"
 }
 ```
 
@@ -123,8 +123,8 @@ Strings are value defined using regular expressions.
 **status.jsond**
 ```
 {
-	"status":"string:^(OK|FAILURE)$",
-	"utc":"string:\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d{1,6})?Z"
+	"utc": "string:\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?Z",
+	"status": "string:^(OK|FAILURE)$"
 }
 ```
 
@@ -155,16 +155,16 @@ The following example is an enhanced version of the previous example, enhanced w
 **person.jsond**
 ```
 {
-    "name": "string:\w{2,}",
-    "age": "number:{18,}",
-    "student": "boolean",
-    "favorites": {
-	"artist": "string",
-	"team": "string"
-    },
-    "hobbies": [
-        "string"
-    ]
+	"name": "string:\\w{2,}",
+	"age": "number:{18,}",
+	"student": "boolean",
+	"favorites": {
+		"artist": "string",
+		"team": "string"
+	},
+	"hobbies": [
+		"string"
+	]
 }
 ```
 
@@ -177,16 +177,16 @@ JSOND support comments inside the JSON structure. Comments can be made in relati
 **person.jsond**
 ```
 {
-    "name": "string:\w{2,}",
-    "age": "number:{18,}:We are only allowed to process users that are at least 18 years old.",
-    "student": "boolean",
-    "favorites::To be defined in it's own structure.": {
-	"artist": "string",
-	"team": "string"
-    },
-    "hobbies": [
-        "string::Should we define a list of known hobbies?"
-    ]
+	"hobbies": [
+		"string::Should we define a list of known hobbies?"
+	],
+	"favorites::To be defined in it's own structure.": {
+		"team": "string",
+		"artist": "string"
+	},
+	"student": "boolean",
+	"age": "number:{18,}:We are only allowed to process users that are at least 18 years old.",
+	"name": "string:\\w{2,}"
 }
 ```
 
