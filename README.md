@@ -33,7 +33,8 @@ Based on the valid values JSOND simply defines the following types:
 The following JSOND defines a person with a name, an age, whether the person is student or not, the persons favorite artist and team, and a list of hobbies.
 
 **person.jsond**
-```
+
+```json
 {
     "name": "string",
     "age": "number",
@@ -53,7 +54,8 @@ The types "string", "number", and "boolean" is used to define the first three pr
 Properties can be defined as optional. Below the previous example has been enhanced so that the age number, favorites object and hobbies array are optional.
 
 **person.jsond**
-```
+
+```json
 {
     "name": "string",
     "age:optional": "number",
@@ -73,7 +75,8 @@ Properties that are defined as optional may either be missing, defined as null, 
 As long as JSOND can parse the type, any user-defined JSOND is valid as type. The name of the JSOND structure is used as the type name. In the example below favorites has been defined in a structure named favorites.
 
 **favorites.jsond**
-```
+
+```json
 {
     "artist": "string",
     "team": "string"
@@ -81,7 +84,8 @@ As long as JSOND can parse the type, any user-defined JSOND is valid as type. Th
 ```
 
 **person.jsond**
-```
+
+```json
 {
     "name": "string",
     "age": "number",
@@ -96,7 +100,8 @@ Person has been changed so that the defined type of "favorites" are the same as 
 Recursive type definitions are allowed.
 
 **person.jsond**
-```
+
+```json
 {
     "name": "string",
     "age": "number",
@@ -121,7 +126,8 @@ In addition to define types, JSOND can also be used to define valid strings, num
 Strings are value defined using regular expressions.
 
 **status.jsond**
-```
+
+```json
 {
 	"status":"string:^(OK|FAILURE)$",
 	"utc":"string:\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d{1,6})?Z"
@@ -153,7 +159,8 @@ The type of values inside an array can be defined. E.g. ["string"] defines that 
 The following example is an enhanced version of the previous example, enhanced with value definitions.
 
 **person.jsond**
-```
+
+```json
 {
     "name": "string:\w{2,}",
     "age": "number:{18,}",
@@ -175,7 +182,8 @@ The value of name is defined to contain a string with at least two characters. T
 JSOND support comments inside the JSON structure. Comments can be made in relation to both the name and value.
 
 **person.jsond**
-```
+
+```json
 {
     "name": "string:\w{2,}",
     "age": "number:{18,}:We are only allowed to process users that are at least 18 years old.",
