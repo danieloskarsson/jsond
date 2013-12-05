@@ -16,9 +16,10 @@ div svg.railroad-diagram {
 <link rel='stylesheet' href='railroad-diagrams.css'>
 <script src='railroad-diagrams.js'></script>
 <body>
-<table width="100%"><tr>
-<td>
-<h1 id='ident'>NAME</h1>
+<table width="100%">
+<tr>
+<td colspan="2">
+<h1 id='ident'>NAME-VALUE</h1>
 <div>
 <script >
 Diagram(
@@ -26,25 +27,27 @@ Diagram(
 	NonTerminal('name'),
 	Choice(0,Skip(),Sequence(':',OneOrMore(Choice(1,'null','undefined'),'|'))),
     Choice(0,Skip(),Sequence('/*',NonTerminal('comment'),'*/')),
-	'"'
+	'"',
+	':',
+	Choice(0,Sequence('"',NonTerminal('value'),'"'),Terminal('null'))
 ).addTo();
 </script>
 </div>
 </td>
+</tr>
+<tr>
 <td>
 <h1 id='ident'>VALUE</h1>
 <div>
 <script >
 Diagram(
-  Terminal('"'),
   Choice(1,
 	Terminal('boolean'),
     Choice(0,
       Sequence('string',Choice(0,Skip(),Sequence(':',NonTerminal('regular expression')))),
       Sequence('number',Choice(0,Skip(),Sequence(':',OneOrMore(NonTerminal('integer or number interval')))))
     )
-  ),
-  Terminal('"')
+  )
 )
 .addTo();
 </script>
@@ -57,20 +60,11 @@ Diagram(
 <div>
 <script >
 Diagram(
-
-
-Sequence('{'
-,
-
-Choice(1, 
-Skip(),
-Sequence(NonTerminal('integer'),','),
-Sequence(NonTerminal('integer'),',',NonTerminal('integer')),
-Sequence(',',NonTerminal('integer'))
-),
-
-'}')
-
+'{',
+Choice(0, NonTerminal('integer'), Skip()),
+',',
+Choice(0, NonTerminal('integer'), Skip()),
+'}'
 ).addTo();
 </script>
 </div>
@@ -80,19 +74,11 @@ Sequence(',',NonTerminal('integer'))
 <div>
 <script >
 Diagram(
-
-Sequence(
-Choice(0,'[','('),
-
-Choice(1, 
-Sequence(NonTerminal('number'),','),
-Sequence(NonTerminal('number'),',',NonTerminal('number')),
-Sequence(',',NonTerminal('number'))
-),
-
-Choice(0,']',')')
-)
-
+Choice(0, '[', '('),
+Choice(0, NonTerminal('number'), Skip()),
+',',
+Choice(0, NonTerminal('number'), Skip()),
+Choice(0, ']', ')')
 )
 .addTo();
 </script>
