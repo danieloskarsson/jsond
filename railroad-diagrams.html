@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<style>
+body {
+        background-color: hsl(30,20%, 95%);
+}
+h1 {
+        font-family: sans-serif;
+        font-size: 1em;
+}
+div svg.railroad-diagram {
+        width: 100%;  /* Scale to the width of the parent */
+        height: 100%;  /* Preserve the ratio. Could be related to https://bugs.webkit.org/show_bug.cgi?id=82489 */
+}
+
+</style>
+<link rel='stylesheet' href='railroad-diagrams.css'>
+<script src='railroad-diagrams.js'></script>
+<body>
+<table width="100%"><tr>
+<td>
+<h1 id='ident'>NAME</h1>
+<div>
+<script >
+Diagram(
+	'"',
+	NonTerminal('name'),
+	Choice(0,Skip(),Sequence(':',OneOrMore(Choice(1,'null','undefined'),'|'))),
+    Choice(0,Skip(),Sequence('/*',NonTerminal('comment'),'*/')),
+	'"'
+).addTo();
+</script>
+</div>
+</td>
+<td>
+<h1 id='ident'>VALUE</h1>
+<div>
+<script >
+Diagram(
+  Terminal('"'),
+  Choice(1,
+	Terminal('boolean'),
+    Choice(0,
+      Sequence('string',Choice(0,Skip(),Sequence(':',NonTerminal('regular expression')))),
+      Sequence('number',Choice(0,Skip(),Sequence(':',OneOrMore(NonTerminal('integer or number interval')))))
+    )
+  ),
+  Terminal('"')
+)
+.addTo();
+</script>
+</div>
+</td>
+</tr>
+<tr>
+<td>
+<h1 id='ident'>INTEGER INTERVAL</h1>
+<div>
+<script >
+Diagram(
+
+
+Sequence('{'
+,
+
+Choice(1, 
+Skip(),
+Sequence(NonTerminal('integer'),','),
+Sequence(NonTerminal('integer'),',',NonTerminal('integer')),
+Sequence(',',NonTerminal('integer'))
+),
+
+'}')
+
+).addTo();
+</script>
+</div>
+</td>
+<td>
+<h1 id='ident'>NUMBER INTERVAL</h1>
+<div>
+<script >
+Diagram(
+
+Sequence(
+Choice(0,'[','('),
+
+Choice(1, 
+Sequence(NonTerminal('number'),','),
+Sequence(NonTerminal('number'),',',NonTerminal('number')),
+Sequence(',',NonTerminal('number'))
+),
+
+Choice(0,']',')')
+)
+
+)
+.addTo();
+</script>
+</div>
+</td>
+</tr>
+</table>
