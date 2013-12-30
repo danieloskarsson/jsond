@@ -137,7 +137,7 @@ Strings are value defined using regular expressions.
 ```json
 {
 	"status":"string:^(OK|FAILURE)$",
-	"utc":"string:\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d{1,6})?Z"
+	"utc":"string:\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?Z"
 }
 ```
 
