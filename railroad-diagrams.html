@@ -55,6 +55,21 @@ Sequence('number',Choice(1,Skip(),Sequence(':',OneOrMore(Choice(0, NonTerminal('
 .addTo();
 </script>
 </div>
+<h1 id='ident'>VALUE (with support for files)</h1>
+<div>
+<script >
+Diagram(
+Choice(0,
+NonTerminal('object'),
+NonTerminal('array'),
+'boolean',
+Sequence('string',Choice(1,Skip(),Sequence(':',NonTerminal('regular expression')))),
+Sequence('number',Choice(1,Skip(),Sequence(':',OneOrMore(Choice(0, NonTerminal('number interval'), NonTerminal('integer interval')))))),
+Sequence(Choice(0,Terminal('http://'),Terminal('https://'),Terminal('file://')),Choice(0,NonTerminal('filepath'),Skip()),NonTerminal('filename'),Terminal('.jsond'))
+)
+).addTo();
+</script>
+</div>
 <h1 id='ident'>NUMBER INTERVAL</h1>
 <div>
 <script >
