@@ -5,6 +5,7 @@ body {
 }
 h1 {
         font-family: sans-serif;
+		font-style:italic;
         font-size: 1em;
 }
 div svg.railroad-diagram {
@@ -16,73 +17,75 @@ div svg.railroad-diagram {
 <link rel='stylesheet' href='railroad-diagrams.css'>
 <script src='railroad-diagrams.js'></script>
 <body>
-<table width="100%">
-<tr>
-<td colspan="2">
-<h1 id='ident'>NAME-VALUE</h1>
+<h1 id='ident'>NAME</h1>
 <div>
 <script >
 Diagram(
-	'"',
-	NonTerminal('name'),
-	Choice(0,Skip(),Sequence(':',OneOrMore(Choice(1,'null','undefined'),'|'))),
-    Choice(0,Skip(),Sequence('/*',NonTerminal('comment'),'*/')),
-	'"',
-	':',
-	Choice(0,Sequence('"',NonTerminal('value'),'"'),Terminal('null'))
-).addTo();
-</script>
-</div>
-</td>
-</tr>
-<tr>
-<td>
-<h1 id='ident'>VALUE</h1>
-<div>
-<script >
-Diagram(
-  Choice(1,
-	Terminal('boolean'),
-    Choice(0,
-      Sequence('string',Choice(0,Skip(),Sequence(':',NonTerminal('regular expression')))),
-      Sequence('number',Choice(0,Skip(),Sequence(':',OneOrMore(NonTerminal('integer or number interval')))))
-    )
-  )
+NonTerminal('string'),
+Optional(
+Sequence(':',Choice(1,Skip(),'null','undefined'))
+,'skip')
 )
 .addTo();
 </script>
 </div>
-</td>
-</tr>
-<tr>
-<td>
+<h1 id='ident'>NAME (with javascript-styled comments)</h1>
+<div>
+<script >
+Diagram(
+NonTerminal('string'),
+Choice(0,Skip(),Sequence(':',Choice(0,'null','undefined'))),
+Optional(Sequence('/*',NonTerminal('string'),'*/'),'skip')
+)
+.addTo();
+</script>
+</div>
+<h1 id='ident'>VALUE</h1>
+<div>
+<script >
+Diagram(
+Choice(0,
+NonTerminal('object'),
+NonTerminal('array'),
+'boolean',
+Sequence('string',Choice(1,Skip(),Sequence(':',NonTerminal('regular expression')))),
+Sequence('number',Choice(1,Skip(),Sequence(':',OneOrMore(Choice(0, NonTerminal('number interval'), NonTerminal('integer interval'))))))
+)
+)
+.addTo();
+</script>
+</div>
+<h1 id='ident'>NUMBER INTERVAL</h1>
+<div>
+<script >
+Diagram(
+Choice(0,'[','('),
+
+Choice(1,
+Sequence(NonTerminal('number'),','),
+Sequence(NonTerminal('number'),',',NonTerminal('number')),
+Sequence(',',NonTerminal('number'))
+),
+
+Choice(0,']',')')
+
+).addTo();
+</script>
+</div>
 <h1 id='ident'>INTEGER INTERVAL</h1>
 <div>
 <script >
 Diagram(
 '{',
-Choice(0, NonTerminal('integer'), Skip()),
-',',
-Choice(0, NonTerminal('integer'), Skip()),
+
+Choice(1,
+Sequence(NonTerminal('integer'),','),
+Sequence(NonTerminal('integer'),',',NonTerminal('integer')),
+Sequence(',',NonTerminal('integer'))
+),
+
 '}'
+
 ).addTo();
 </script>
 </div>
-</td>
-<td>
-<h1 id='ident'>NUMBER INTERVAL</h1>
-<div>
-<script >
-Diagram(
-Choice(0, '[', '('),
-Choice(0, NonTerminal('number'), Skip()),
-',',
-Choice(0, NonTerminal('number'), Skip()),
-Choice(0, ']', ')')
-)
-.addTo();
-</script>
-</div>
-</td>
-</tr>
-</table>

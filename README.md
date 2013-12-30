@@ -1,7 +1,7 @@
 
 ## Introduction
 
-JSOND, _may also be written as_ jsond, is a way of defining JSON using JSON. The object being defined is created using json where values are either a nested object, an array, or a string representing the data type.
+JSOND, _may also be written as_ jsond, is a way of defining JSON using JSON. The structure being defined is created using JSON where values are either a nested object, an array, or a string defining the type of data.
 
 ### JSON
 
@@ -28,6 +28,13 @@ Based on the valid values JSOND simply defines the following types:
 - "number"
 - "boolean"
 
+JSOND is simply normal JSON where the values are either
+
+
+
+
+ taking JSON and replacing the values with one of the types listed above.
+
 ### An illustrative example
 
 The following JSOND defines a person with a name, an age, whether the person is student or not, the persons favorite artist and team, and a list of hobbies.
@@ -39,14 +46,14 @@ The following JSOND defines a person with a name, an age, whether the person is 
     "age": "number",
     "student": "boolean",
     "favorites": {
-	"artist": "string",
-	"team": "string"
+		"artist": "string",
+		"team": "string"
     },
     "hobbies": []
 }
 ```
 
-The types "string", "number", and "boolean" is used to define the first three properties name, age and student. The nested favorites object is defined as having two properties artist and team, both of the type "string". The property hobbies is defined as an array.
+The types **string**, **number**, and **boolean** is used to define the first three properties _name_, _age_ and _student_. The nested _favorites_ object is defined as having two properties _artist_ and _team_, both of the type **string**. The property _hobbies_ is defined as an array.
 
 ### Optional properties
 
