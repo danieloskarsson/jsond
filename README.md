@@ -226,3 +226,20 @@ In the example above there are three comments:
 - _We are only allowed to process users that are at least 18 years old._ on the value of age.
 - _To be defined in it's own structure._ on the property name favorites.
 - _Should we define a list of known hobbies?_ on the defined value type in hobbies.
+
+
+## Value References
+
+It is also possible to use a value reference as the value in JSOND.
+
+Before we get in to the example there are two more points worth mentioning:
+
+1. ~~Arrays must define a single value with the data type they will contain. In JSOND it is not allowed to define different types of data within the same array.~~ (no, they will accept 0-many of any of the structures defined in an array, or any structure if the array is empty(?))
+
+2. ~~JSOND does not allow defining something as null.~~ (yes it does with the null keyword)
+
+### A few words on completeness
+
+At this stage, and possibly never, JSOND is not meant to be complete. The purpose for its creation on a rainy thursday was to describe json output from rest endpoints, so that corresponding models in the client could be generated rather than manually created.
+
+
