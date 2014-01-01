@@ -239,7 +239,7 @@ Before we get in to the example there are two more points worth mentioning:
 
 2. ~~JSOND does not allow defining something as null.~~ (yes it does with the null keyword)
 
-### A few words on completeness
+## A few words on completeness
 
 At this stage, and possibly never, JSOND is not meant to be complete. The purpose for its creation on a rainy thursday was to describe json output from rest endpoints, so that corresponding models in the client could be generated rather than manually created.
 
