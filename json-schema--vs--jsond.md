@@ -27,7 +27,7 @@
 {
 	"firstName":"string",
 	"listName":"string",
-	"age:optional:Age in years":"number:{0,}"
+	"age:undefined":"number:{0,}"
 }
 ```
 
@@ -70,10 +70,12 @@
 **JSOND**
 ```
 {
-	"id::The unique identifier for a product": "number:{,0},{1,}",
-	"name::Name of the product": "string",
+	"id:": "number:{,0}{1,}",
+	"name": "string",
 	"price": "number:(0,]",
-	"tags::JSOND cannot describe minimum number of items or unique items.": ["string"]
+	"tags:": [
+        "string"
+    ]
 }
 ```
 
@@ -132,15 +134,17 @@
 
 ```
 [{
-	"id::The unique identifier for a product": "number",
+	"id": "number",
 	"name": "string",
 	"price": "number:(0,]",
-	"tags:optional:JSOND cannot describe minimum number of items or unique items.": ["string"],
-	"dimensions:optional": {
+	"tags:undefined": [
+        "string"
+    ],
+	"dimensions:undefined": {
 		"length":"number",
 		"width":"number",
 		"height":"number"
 	},
-	"warehouseLocation:optional:Coordinates of the warehouse with the product": "geo"	
+	"warehouseLocation:undefined": "file://geo.jsond"	
 }]
 ```
