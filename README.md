@@ -56,26 +56,30 @@ The following JSOND defines a person with a name, an age, whether the person is 
 
 The types **string**, **number**, and **boolean** is used to define the first three properties _name_, _age_ and _student_. The nested _favorites_ object is defined as having two properties _artist_ and _team_, both of the type **string**. The property _hobbies_ is defined as an array.
 
-### Optional properties
+### Property definitions
 
-Properties can be defined as optional. Below the previous example has been enhanced so that the age number, favorites object and hobbies array are optional.
+Properties can be defined as optional or allowing the value null. Property definitions appear after the property name definition separated with a colon. There are two valid property definitions:
+
+- undefined
+- null
+
+It is also possible use both undefined and null to define the same property by separating the definitions with the pipe character. When no property definition is supplied the property cannot be neither undefined or null.
 
 **person.jsond**
-
-```json
+```
 {
-	"hobbies:optional": [],
-	"favorites:optional": {
-		"team": "string",
-		"artist": "string"
+	"name":"string",
+	"age:undefined":"number",
+	"student":"boolean",
+	"favorites:null": {
+		"artist":"string",
+		"team":"string"
 	},
-	"student": "boolean",
-	"age:optional": "number",
-	"name": "string"
+	"hobbies:undefined|null": []
 }
 ```
 
-Properties that are defined as optional may either be missing, defined as null, or contain a value of the defined type.
+Above the previous example has been enhanced so that the age member is optional, the favorites value may be null and hobbies array are both optional and may be null.
 
 ### Custom types
 
