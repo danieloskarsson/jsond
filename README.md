@@ -186,22 +186,39 @@ The value of name is defined to contain a string with at least two characters. T
 
 ## Comments
 
-JSOND support comments inside the JSON structure. Comments can be made in relation to both the name and value.
+JSOND support comments inside the JSON structure. Comments are written as a part of the property name definition. oth single-line // and multi-line /* */ comments are supported. If a single-line comment is used, the remainder of the characters in the key definition is considered to be part of the comment.
+
 
 **person.jsond**
-
-```json
+```
 {
-	"hobbies": [
-		"string::Should we define a list of known hobbies?"
-	],
-	"favorites::To be defined in it's own structure.": {
-		"team": "string",
-		"artist": "string"
-	},
+	"name": "string",
+	"age/*Must be <= 18 years old*/": "number:{18,}",
 	"student": "boolean",
-	"age": "number:{18,}:We are only allowed to process users that are at least 18 years old.",
-	"name": "string:\\w{2,}"
+	"favo/*Comment*/rites": {
+		"artist": "string",
+		"team": "string"
+	},
+	"hobbies/*TODO: Define a list of known hobbies!*/": [
+		"string"
+	]
+}
+```
+
+
+**person.jsond**
+```
+{
+	"name": "string",
+	"age/Must be <= 18 years old": "number:{18,}",
+	"student": "boolean",
+	"favo/*Comment*/rites": {
+		"artist": "string",
+		"team": "string"
+	},
+	"hobbies\/TODO: Define a list of known hobbies!": [
+		"string"
+	]
 }
 ```
 
@@ -210,5 +227,3 @@ In the example above there are three comments:
 - _We are only allowed to process users that are at least 18 years old._ on the value of age.
 - _To be defined in it's own structure._ on the property name favorites.
 - _Should we define a list of known hobbies?_ on the defined value type in hobbies.
-
-As can be seen in the example above the use of comments does not require the use of value definitions.
