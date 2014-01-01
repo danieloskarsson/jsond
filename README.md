@@ -12,28 +12,23 @@ Let's recap JSON basics. JSON is built on two structures:
 
 In JSON, a value must be one of the following:
 
-- object
-- array
-- string
-- number
-- true
-- false
-- null
+- `object`
+- `array`
+- `string`
+- `number`
+- `true`
+- `false`
+- `null`
 
 ### Types
 
 Based on the valid values JSOND simply defines the following types:
 
-- "string"
-- "number"
-- "boolean"
+- `"string"`
+- `"number"`
+- `"boolean"`
 
-JSOND is simply normal JSON where the values are either
-
-
-
-
- taking JSON and replacing the values with one of the types listed above.
+JSOND has the characteristic that it has the exact same structure as the object being defined. The difference between an JSON example and valid JSOND is that example values has been replaced with one of the defined types.
 
 ### An illustrative example
 
@@ -54,14 +49,14 @@ The following JSOND defines a person with a name, an age, whether the person is 
 }
 ```
 
-The types **string**, **number**, and **boolean** is used to define the first three properties _name_, _age_ and _student_. The nested _favorites_ object is defined as having two properties _artist_ and _team_, both of the type **string**. The property _hobbies_ is defined as an array.
+The types `"string"`, `"number"`, and `"boolean"` is used to define the properties name, age and student. The property hobbies is defined as an array of json values. The nested favorites object is defined as having the two properties artist and team, both of the type "string".
 
 ### Property definitions
 
 Properties can be defined as optional or allowing the value null. Property definitions appear after the property name definition separated with a colon. There are two valid property definitions:
 
-- undefined
-- null
+- `undefined`
+- `null`
 
 It is also possible use both undefined and null to define the same property by separating the definitions with the pipe character. When no property definition is supplied the property cannot be neither undefined or null.
 
