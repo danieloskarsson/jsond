@@ -22,9 +22,30 @@ div svg.railroad-diagram {
 <script >
 Diagram(
 NonTerminal('string'),
-Optional(
-Sequence(':',Choice(1,Skip(),'null','undefined'))
-,'skip')
+Optional(Sequence(':',
+
+Choice(0,
+'null',Sequence('null','|','undefined'),Sequence('undefined','|','null'),'undefined'
+)
+
+),'skip')
+)
+.addTo();
+</script>
+</div>
+<h1 id='ident'>NAME</h1>
+<div>
+<script >
+Diagram(
+NonTerminal('string'),
+Optional(Sequence(':',
+
+Choice(0, 
+Sequence('null',Choice(1,Sequence('|','undefined'),Skip())),
+Sequence('undefined',Choice(0,Skip(),Sequence('|','null')))
+)
+
+),'skip')
 )
 .addTo();
 </script>
@@ -62,17 +83,17 @@ Sequence('number',Choice(1,Skip(),Sequence(':',OneOrMore(Choice(0, NonTerminal('
 <script >
 Diagram(
 Choice(0,
-NonTerminal('object'),
-NonTerminal('array'),
 'boolean',
 Sequence('string',Choice(1,Skip(),Sequence(':',NonTerminal('regular expression')))),
-Sequence('number',Choice(1,Skip(),Sequence(':',OneOrMore(Choice(0, NonTerminal('number interval'), NonTerminal('integer interval')))))),
-Sequence(Choice(0,Terminal('http://'),Terminal('https://'),Terminal('file://')),Choice(0,NonTerminal('filepath'),Skip()),NonTerminal('filename'),Terminal('.jsond'))
+Sequence(Choice(0,'number','integer'),Choice(1,Skip(),Sequence(':',OneOrMore(Choice(0, NonTerminal('interval'), NonTerminal('set')))))),
+NonTerminal('reference'),
+NonTerminal('object'),
+NonTerminal('array')
 )
 ).addTo();
 </script>
 </div>
-<h1 id='ident'>NUMBER INTERVAL</h1>
+<h1 id='ident'>MATHEMATICAL INTERVAL</h1>
 <div>
 <script >
 Diagram(
@@ -89,20 +110,15 @@ Choice(0,']',')')
 ).addTo();
 </script>
 </div>
-<h1 id='ident'>INTEGER INTERVAL</h1>
+<h1 id='ident'>MATHEMATICAL SET</h1>
 <div>
 <script >
 Diagram(
-'{',
+Terminal('{'),
 
-Choice(1,
-Sequence(NonTerminal('integer'),','),
-Sequence(NonTerminal('integer'),',',NonTerminal('integer')),
-Sequence(',',NonTerminal('integer'))
-),
+OneOrMore(NonTerminal('number'), ','),
 
-'}'
-
+Terminal('}')
 ).addTo();
 </script>
 </div>
