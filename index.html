@@ -81,63 +81,11 @@ footer {
 <p>The integer can be further defined using a colon followed by a (mathematical) set or interval.</p>
 <p class="example"><em><a href="examples.html"><strong>"integer:{1,2,4}"</strong> defines that the JSON value must be 1, 2, or 4.</a></em></p>
 <p class="example"><em><a href="examples.html"><strong>"integer:[1,4)"</strong> defines that the JSON value must be an integer greater than or equal to 1, and less than 4.</a></em></p>
-<h2>Railroad Diagrams</h2>
-Figure 1 shows a railroad diagram of JSOND values.
-<div>
-<script >
-Diagram(
-Choice(0,
-'boolean',
-Sequence('string',Choice(1,Skip(),Sequence(':',NonTerminal('regular expression')))),
-Sequence(Choice(0,'number','integer'),Choice(1,Skip(),Sequence(':',OneOrMore(Choice(0, NonTerminal('interval'), NonTerminal('set')))))),
-NonTerminal('reference'),
-NonTerminal('object'),
-NonTerminal('array') 
-)
-).addTo();
-</script>
-<h4 id='ident'>DIAGRAM 1: VALUE</h1>
-</div>
-<div>
-<script >
-Diagram(
-Choice(0,'[','('),
 
-Choice(1,
-Sequence(NonTerminal('number'),','),
-Sequence(NonTerminal('number'),',',NonTerminal('number')),
-Sequence(',',NonTerminal('number'))
-),
-
-Choice(0,']',')')
-
-).addTo();
-</script>
-<h4 id='ident'>DIAGRAM 2: INTERVAL</h1>
-</div>
-<div>
-<script >
-Diagram(
-Terminal('{'),
-
-OneOrMore(NonTerminal('number'), ','),
-
-Terminal('}')
-).addTo();
-</script>
-<h4 id='ident'>DIAGRAM 3: SET</h1>
-</div>
-<h2><a href="http://github.com/jsond/jsond.github.io/">JSOND References</a></h2>
+<h2>JSOND References</h2>
 <p>JSOND text can be persisted as a .jsond file. A JSOND file can be referenced using the http or file URI scheme as the JSOND value.</p>
 <p class="example"><em><a href="examples.html"><strong>"http://jsond.org/utc.jsond"</strong> defines that the JSON value must be a string with the format "yyyy-mm-ddThh:mm:ssZ" with optional fractions of the second.</a></em></p>
-<div>
-<script >
-Diagram(
-Sequence(Choice(0,Skip(),Terminal('file://'),Terminal('http://')),Choice(0,NonTerminal('filepath'),Skip()),NonTerminal('filename'),Terminal('.jsond'))
-).addTo();
-</script>
-<h4 id='ident'>DIAGRAM 4: REFERENCE</h1>
-</div>
+
 <h2><a href="name.html">JSOND Names</a></h2>
 <p>When preceeded by a colon and used as the end of a name, JSOND defines two string literals with a special meaning.</p>
 <!--<ul><li>"null"</li><li>"undefined"</li></ul>-->
@@ -146,39 +94,8 @@ Sequence(Choice(0,Skip(),Terminal('file://'),Terminal('http://')),Choice(0,NonTe
 <h3>undefined</h3><p>A JSOND name that end with a colon followed by the string undefined defines that the JSON name/value pair is not a mandatory part of the JSON text.</p>
 <p class="example"><em><a href="examples.html"><strong>"name:undefined"</strong> defines that the JSON name/value pair may not be in the JSON text.</a></em></p>
 <p class="example"><em><a href="examples.html"><strong>"name:null|undefined"</strong> or <strong>"name:undefined|null"</strong> defines that the JSON value may be null and that the JSON name/value pair may not be in the JSON text.</a></em></p>
-<div>
-<script >
-/*
-Diagram(
-NonTerminal('string'),
-Choice(1,Skip(),Sequence(':',
 
-Choice(0,
-Sequence('null',Choice(1,Sequence('|','undefined'),Skip())),
-Sequence('undefined',Choice(0,Skip(),Sequence('|','null')))
-)
-
-))
-)
-.addTo();
-*/
-Diagram(
-NonTerminal('string'),
-Optional(Sequence(':',
-
-Choice(1,
-Sequence('null',Choice(1,Skip(),Sequence('|','undefined'))),
-Sequence('undefined',Choice(0,Skip(),Sequence('|','null')))
-)
-
-),'skip')
-)
-.addTo();
-</script>
-<h4>DIAGRAM 5: NAME</h4>
-</div>
-
-<h2>JSOND Examples</h2>
+<h2>A. Examples</h2>
 
 Example 1 defines a person with a required first and last name and a optional age that if given must have a value that is an positive integer.
 <pre>
@@ -235,6 +152,95 @@ Example 4 defines geo.
 </pre>
 <h4>EXAMPLE 4: geo.jsond</h4>
 -->
+
+
+<h2>B. Figures</h2>
+<div>
+<script >
+Diagram(
+Choice(0,
+'boolean',
+Sequence('string',Choice(1,Skip(),Sequence(':',NonTerminal('regular expression')))),
+Sequence(Choice(0,'number','integer'),Choice(1,Skip(),Sequence(':',OneOrMore(Choice(0, NonTerminal('interval'), NonTerminal('set')))))),
+NonTerminal('reference'),
+NonTerminal('object'),
+NonTerminal('array') 
+)
+).addTo();
+</script>
+<h4 id='ident'>FIGURE 1: VALUE</h1>
+</div>
+<div>
+<script >
+Diagram(
+Choice(0,'[','('),
+
+Choice(1,
+Sequence(NonTerminal('number'),','),
+Sequence(NonTerminal('number'),',',NonTerminal('number')),
+Sequence(',',NonTerminal('number'))
+),
+
+Choice(0,']',')')
+
+).addTo();
+</script>
+<h4 id='ident'>FIGURE 2: INTERVAL</h1>
+</div>
+<div>
+<script >
+Diagram(
+Terminal('{'),
+
+OneOrMore(NonTerminal('number'), ','),
+
+Terminal('}')
+).addTo();
+</script>
+<h4 id='ident'>FIGURE 3: SET</h1>
+</div>
+<div>
+<script >
+Diagram(
+Sequence(Choice(0,Skip(),Terminal('file://'),Terminal('http://')),Choice(0,NonTerminal('filepath'),Skip()),NonTerminal('filename'),Terminal('.jsond'))
+).addTo();
+</script>
+<h4 id='ident'>FIGURE 4: REFERENCE</h1>
+</div>
+
+<div>
+<script >
+/*
+Diagram(
+NonTerminal('string'),
+Choice(1,Skip(),Sequence(':',
+
+Choice(0,
+Sequence('null',Choice(1,Sequence('|','undefined'),Skip())),
+Sequence('undefined',Choice(0,Skip(),Sequence('|','null')))
+)
+
+))
+)
+.addTo();
+*/
+Diagram(
+NonTerminal('string'),
+Optional(Sequence(':',
+
+Choice(1,
+Sequence('null',Choice(1,Skip(),Sequence('|','undefined'))),
+Sequence('undefined',Choice(0,Skip(),Sequence('|','null')))
+)
+
+),'skip')
+)
+.addTo();
+</script>
+<h4 id='ident'>FIGURE 5: NAME</h4>
+</div>
+
+
 <!--It was a conscious decision to not include features that would complicate the language.
 JSOND does not support the more advanced features such as the possibility to use regular expressions to define valid names.
 If there are hard requirements for such features you JSON schema is probably interesting (patternProperties).
