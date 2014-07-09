@@ -1,0 +1,98 @@
+<html> <head> <link href='http://fonts.googleapis.com/css?family=Cousine' rel='stylesheet' type='text/css'>
+
+<style type="text/css">
+@import url(http://fonts.googleapis.com/css?family=Vollkorn:400,400italic,700,700italic&subset=latin);
+
+html, body {
+	padding:1em;
+	margin:auto;
+	max-width:48em;
+	b_ackground-color:#f5f6f6;
+	background:linen;
+}
+body {
+	font-family: 'Cousine', sans-serif;
+    f_ont: 1.3em "Vollkorn", Palatino, Times;
+	color: #424242;
+    line-height: 1.4;
+    text-align: justify;
+    }
+</style>
+
+</head>
+
+<link rel='stylesheet' href='railroad-diagrams.css'>
+<script src='railroad-diagrams.js'></script>
+
+<body>
+
+<h1>JSOND</h1><h2>Introduction</h2><p>JSOND (JSON Definition) is a way of defining JSON text using JSON text.</p>
+<p>The purpose of JSOND is to be able to articulate JSON text without example values. JSOND is a superset of JSON so JSOND text have the same structure as the JSON text defined.</p>
+<h2>Basics</h2>
+<p>Let's recap JSON basics. JSON is built on two structures:</p>
+<ul><li>A unordered set of name:value pairs (object)</li><li>An ordered list of values (array)</li></ul>
+<p>In JSON, a value must be one of the following:</p>
+<ul><li>object</li><li>array</li><li>string</li><li>number</li><li>true</li><li>false</li><li>null</li></ul>
+<h2>Values</h2><p>JSOND defines four literals a special meaning:</p>
+<ul><li>"boolean"</li><li>"string"</li><li>"number"</li><li>"integer"</li></ul>
+<h3>"boolean"</h3><p>A JSOND value "boolean" defines that the JSON value must be either true or false.</p>
+<h3>"string"</h3><p>A JSOND value "string" defines that the JSON value must be a string.</p>
+<p>It is possible to further define the string using a colon followed by a regular expression.</p>
+<p><em>E.g. "string:^(male|female)$" defines that the JSON value must be either "male" or "female".</em></p>
+<h3>"number"</h3><p>A JSOND value "number" defines that the JSON value must be a number.</p>
+<p>It is possible to further define the number using a colon followed by a interval notation.</p>
+<p><em>E.g. "number:[1,4)" defines that the number must be equal to or larger than 1 and lower than 4.</em></p>
+<h3>"integer"</h3><p>A JSOND value "integer" defines that the JSON value must be an integer.</p>
+<p>It is possible to further define the integer using a colon followed by a interval notation.</p>
+<p><em>E.g. "integer:[1,4)" defines that the number must be either 1, 2 or 3.</em></p>
+<h2>Names</h2>
+<h3>undefined</h3><p>A JSOND name may be followed by a comma and the string undefined to express that the JSON name:value pair may be absent from the JSON text.</p>
+<h3>null</h3><p>A JSOND name may be followed by a comma and the string null to express that the JSON value may be null.</p>
+<!--
+<h2>Reusable values</h2>
+xxx
+-->
+<h2>Diagrams</h2>
+<h3>Name</h3>
+<div>
+<script >
+Diagram(
+'"',
+NonTerminal('string'),
+Optional(
+Sequence(':',Choice(0,'undefined','null'))
+,'skip'),
+'"'
+)
+.addTo();
+</script>
+</div>
+<h3>Value</h3>
+<div>
+<script >
+Diagram(
+'"',
+Choice(1,
+'boolean',
+Sequence('string',Choice(1,Skip(),Sequence(':',NonTerminal('regular expression')))),
+Sequence(Choice(0,'number','integer'),Choice(0,Sequence(':',NonTerminal('interval notation')),Skip())),
+Comment('http:// or file:// to jsond file')
+),
+'"')
+.addTo();
+</script>
+</div>
+<!--
+<h2>Example</h2>
+<h3>JSOND</h3>
+{
+	"name":"string:\\w{2,}",
+	"age":"integer:[18,",
+	"pi":"number:[3.14,3.15)"
+}
+<h3>JSON</h3>
+-->
+
+
+</body>
+</html>
