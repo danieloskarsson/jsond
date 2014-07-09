@@ -1,0 +1,91 @@
+<html>
+<head>
+<link href='http://fonts.googleapis.com/css?family=Cousine' rel='stylesheet' type='text/css'>
+
+<style type="text/css">
+@import url(http://fonts.googleapis.com/css?family=Vollkorn:400,400italic,700,700italic&subset=latin);
+
+html, body {
+	padding:1em;
+	margin:auto;
+	max-width:51em;
+	b_ackground-color:#f5f6f6;
+	background:linen;
+}
+body {
+	font-family: 'Cousine', sans-serif;
+    f_ont: 1.3em "Vollkorn", Palatino, Times;
+	color: #424242;
+    line-height: 1.4;
+    text-align: justify;
+}
+hr {
+    border: 0;
+    height: 1px;
+    background: #333;
+}
+footer {
+	width: 100%;
+	text-align: center;
+}
+p.code {
+	white-space: pre-wrap;
+	word-wrap: break-word;
+	tab-size: 4;
+}
+a:link, a:visited, a:hover, a:focus, a:active {
+	color:#424242;
+	text-decoration:none;
+}
+</style>
+
+</head>
+
+<body>
+<br>
+
+<h1>EXAMPLES</h1>
+<h2>Product</h2>
+<p>The purpose of JSOND is to be able to articulate JSON text without example values. JSOND is a superset of JSON so JSOND text have the same structure as the JSON text defined.</p>
+<h2>Basics</h2>
+
+example that interval notation can be open in one direction
+
+This JSOND text defines a product:
+<p class="code">{
+	"id": "integer",
+	"name": "string",
+	"price": "number:[0,)",
+	"tags:undefined": [
+		"string"
+	]
+}
+</p>
+<p>The price is defined as any positive number</p>
+
+<h3>JSOND</h3>
+<p class="code">"object": {
+	"string": "string:\\w{2,}",
+	"integer": "integer:[18,",
+	"object": {
+		"array":[
+			"string"
+		]		
+	},
+	"pi": "number:[3.14,3.15)"
+}
+</p>
+
+<br><br><br><footer>JSOND.org &mdash; 2014-01-14 20:25 UTC</footer>
+
+
+
+<!--<br>
+<sup id="fn1">1. It's that simple.</a></sup><br>
+<sup id="fn1">2. <a href="#ref1" title="Jump back to footnote 1 in the text.">Syntax Diagram: name.svg</a></sup><br>
+<sup id="fn1">3. <a href="#ref1" title="Jump back to footnote 1 in the text.">More examples are available at <a href="examples.html" style="text-decoration:underline;">examples.html</a></sup><br>-->
+
+<!--<br><br><br><footer>JSOND.org &mdash; 2014-01-14 20:25 UTC</footer>-->
+
+</body>
+</html>
