@@ -1,6 +1,9 @@
 <html>
 <head>
 <link rel='stylesheet' href='railroad-diagrams.css'>
+<link rel="stylesheet" href="highlight/styles/solarized_light.css">
+<script src="highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
 <script src='railroad-diagrams.js'></script>
 <style type="text/css">
 @import url(http://fonts.googleapis.com/css?family=Vollkorn:400,400italic,700,700italic&subset=latin);
@@ -69,48 +72,54 @@ footer {
 <ul><li>object</li><li>array</li><li>string</li><li>number</li><li>true</li><li>false</li><li>null</li></ul>
 <h2><a href="value.html">JSOND Values<a/></h2>
 <p>When used as a value, JSOND defines four string literals with a special meaning.</p>
-<!--<ul><li>"boolean"</li><li>"string"</li><li>"number"</li><li>"integer"</li></ul>-->
-<h3>boolean</h3><p>A JSOND value "boolean" defines that the JSON value must be either true or false.</p>
-<h3>string</h3><p>A JSOND value "string" defines that the JSON value must be a string.</p>
+<h3>"boolean"</h3><p>A JSOND value "boolean" defines that the JSON value must be either true or false.</p>
+<h3>"string"</h3><p>A JSOND value "string" defines that the JSON value must be a string.</p>
 <p>The string can be further defined using a colon followed by a regular expression.</p>
-<p class="example"><em><a href="examples.html"><strong>"string:^(red|green|blue)$"</strong> defines that the JSON value must be either "red", "green" or "blue".</a></em></p>
-<h3>number</h3><p>A JSOND value "number" defines that the JSON value must be a number.</p>
+<pre><code>"string:^(red|green|blue)$"</code></pre>
+<p><em>Defines that the JSON value must be either "red", "green" or "blue".</em></p>
+<h3>"number"</h3><p>A JSOND value "number" defines that the JSON value must be a number.</p>
 <p>The number can be further defined using a colon followed by a (mathematical) set or interval.</p>
-<p class="example"><em><a href="examples.html"><strong>"number:{1.5,2,4.8}"</strong> defines that the JSON value must be 1.5, 2.4, or 4.8.</a></em></p>
-<p class="example"><em><a href="examples.html"><strong>"number:[1,4)"</strong> defines that the JSON value must be a number greater than or equal to 1, and less than 4.</a></em></p>
-<h3>integer</h3><p>A JSOND value "integer" defines that the JSON value must be an integer,<br>i.e. a number without a decimal component.</p>
+<pre><code>"number:{1.5,2.4,4.8}"</code></pre>
+<p><em>Defines that the JSON value must be 1.5, 2.4, or 4.8.</em></p>
+<pre><code>"number:[1,4)"</code></pre>
+<p><em>Defines that the JSON value must be a number greater than or equal to 1, and less than 4.</em></p>
+<h3>"integer"</h3><p>A JSOND value "integer" defines that the JSON value must be an integer,<br>i.e. a number without a decimal component.</p>
 <p>The integer can be further defined using a colon followed by a (mathematical) set or interval.</p>
-<p class="example"><em><a href="examples.html"><strong>"integer:{1,2,4}"</strong> defines that the JSON value must be 1, 2, or 4.</a></em></p>
-<p class="example"><em><a href="examples.html"><strong>"integer:[1,4)"</strong> defines that the JSON value must be an integer greater than or equal to 1, and less than 4.</a></em></p>
+<pre><code>"integer:{1,2,4}"</code></pre>
+<p><em>Defines that the JSON value must be 1, 2, or 4.</em></p>
+<pre><code>"integer:[1,4)"</code></pre>
+<p><em>Defines that the JSON value must be an integer greater than or equal to 1, and less than 4.</em></p>
 
 <h2>JSOND References</h2>
 <p>JSOND text can be persisted as a .jsond file. A JSOND file can be referenced using the http or file URI scheme as the JSOND value.</p>
-<p class="example"><em><a href="examples.html"><strong>"http://jsond.org/utc.jsond"</strong> defines that the JSON value must be a string with the format "yyyy-mm-ddThh:mm:ssZ" with optional fractions of the second.</a></em></p>
+<pre><code>"http://jsond.org/utc.jsond"</code></pre>
+<p><em>Defines that the JSON value must be a string with the format "yyyy-mm-ddThh:mm:ssZ" with optional fractions of the second as defined in http://jsond.org/utc.jsond.</em></p>
 
 <h2><a href="name.html">JSOND Names</a></h2>
 <p>When preceeded by a colon and used as the end of a name, JSOND defines two string literals with a special meaning.</p>
-<!--<ul><li>"null"</li><li>"undefined"</li></ul>-->
-<h3>null</h3><p>A JSOND name that end with a colon followed by the string null defines that in addition to the value defined, the JSON value may be null.</p>
-<p class="example"><em><a href="examples.html"><strong>"name:null"</strong> defines that the JSON value of may be null.</a></em></p>
-<h3>undefined</h3><p>A JSOND name that end with a colon followed by the string undefined defines that the JSON name/value pair is not a mandatory part of the JSON text.</p>
-<p class="example"><em><a href="examples.html"><strong>"name:undefined"</strong> defines that the JSON name/value pair may not be in the JSON text.</a></em></p>
-<p class="example"><em><a href="examples.html"><strong>"name:null|undefined"</strong> or <strong>"name:undefined|null"</strong> defines that the JSON value may be null and that the JSON name/value pair may not be in the JSON text.</a></em></p>
+
+<h3>"null"</h3><p>A JSOND name that end with a colon followed by the string null defines that in addition to the value defined, the JSON value may be null.</p>
+<pre><code>"name:null"</code></pre>
+<p><em>Defines that the JSON value of may be null.</em></p>
+<h3>"undefined"</h3><p>A JSOND name that end with a colon followed by the string undefined defines that the JSON name/value pair is not a mandatory part of the JSON text.</p>
+<pre><code>"name:undefined"</code></pre>
+<p><em>Defines that the JSON name/value pair may not be in the JSON text.</em></p>
+<pre><code>"name:undefined|null"</code></pre>
+<p><em>Defines that the JSON value may be null and that the JSON name/value pair may not be in the JSON text.</em></p>
 
 <h2>A. Examples</h2>
 
 Example 1 defines a person with a required first and last name and a optional age that if given must have a value that is an positive integer.
-<pre>
-{
+<pre><code>{
     "firstName": "string",
     "lastName": "string",
     "age:undefined": "integer:[0,"
 }
-</pre>
+</code></pre>
 <h4>EXAMPLE 1: PERSON</h4>
 
 Example 2 defines a product with a required id, name and price and a optional array of strings named tags.
-<pre>
-{
+<pre><code>{
     "id": "integer",
     "name": "string",
     "price": "number:(0",
@@ -118,13 +127,12 @@ Example 2 defines a product with a required id, name and price and a optional ar
         "string"
     ]
 }
-</pre>
+</code></pre>
 <h4>EXAMPLE 2: PRODUCT</h4>
 JSOND is designed to be a minimal language and does not provide a way to require unique items or a certain number of items in a array.
 <br><br>
-Example 3 defines a array of products. A product is defines with a required id, name and price, a optional array of strings named tags, a optional dimensions object and a optional warehouse location. The definition of a warehouse location is found in the refrenced file geo.jsond.
-<pre>
-[
+Example 3 defines a array of products. A product is defines with a required id, name and price, a optional array of strings named tags, a optional dimensions object and a optional warehouse location. The definition of a warehouse location is found in the refrenced file coordinates.jsond.
+<pre><code>[
     {
         "id": "integer",
         "name": "string",
@@ -137,10 +145,10 @@ Example 3 defines a array of products. A product is defines with a required id, 
             "width": "number",
             "height": "number"
         },
-        "warehouseLocation:undefined": "http://jsond.org/geo.jsond"
+        "warehouseLocation:undefined": "http://jsond.org/coordinates.jsond"
     }
 ]
-</pre>
+</code></pre>
 <h4>EXAMPLE 3: ARRAY OF PRODUCTS</h4>
 <!--
 Example 4 defines geo.
