@@ -27,7 +27,7 @@
 {
 	"firstName":"string",
 	"listName":"string",
-	"age:undefined":"number:{0,}"
+	"age?":"[0,)"
 }
 ```
 
@@ -70,10 +70,10 @@
 **JSOND**
 ```
 {
-	"id:": "number:{,0}{1,}",
+	"id:": "integer",
 	"name": "string",
-	"price": "number:(0,]",
-	"tags:": [
+	"price": "(0,]",
+	"tags?": [
         "string"
     ]
 }
@@ -136,15 +136,15 @@
 [{
 	"id": "number",
 	"name": "string",
-	"price": "number:(0,]",
-	"tags:undefined": [
+	"price": "(0,]",
+	"tags?": [
         "string"
     ],
-	"dimensions:undefined": {
+	"dimensions?": {
 		"length":"number",
 		"width":"number",
 		"height":"number"
 	},
-	"warehouseLocation:undefined": "file://geo.jsond"	
+	"warehouseLocation?": "http://jsond.org/geo.jsond"
 }]
 ```
