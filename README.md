@@ -6,7 +6,7 @@ The purpose of JSOND is to facilitate documentation of JSON text.
 
 JSOND text is JSON text that uses JSOND grammar. JSOND grammar is a superset of JSON grammar. The rest of this document describes the JSOND grammar.
 
-1.1.  Conventions Used in This Document
+### Conventions Used in This Document
 
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [RFC2119].
 
@@ -14,7 +14,7 @@ The grammatical rules in this document are to be interpreted as described in [RF
 
 ## Grammar
 
-## Value Types
+### Value Types
 
 To define a set of JSON values, a JSOND value is a string literals that denotes the primitive type.
 
@@ -22,7 +22,7 @@ value = string / boolean / number / integer
 
 Integer is not a primitive type in JSON. It is included in JSOND for pragmatic reasons.
 
-## Value Definitions
+### Value Definitions
 
 JSOND supports defining the value of strings using regular expressions [REF] and numbers using the set or interval notation [REF] as string literals.
 
@@ -52,11 +52,11 @@ JSON arrays MUST consist of zero or more of the structures defined in the JSOND 
 
 JSOND values MAY be stored in a file. Files can be referenced using the file or http protocol [REF]. The protocol is optional if the value can be evaluated as a relative path to a JSOND file.
 
-## Value Constants
+### Value Constants
 
 A value that not valid JSOND grammar is REQUIRED in the JSON text.
 
-## Optional Pair
+### Optional Pair
 
 A name/value pair can be defined as optional in the JSON text by appending the optional character to the end of the name.
 
@@ -141,22 +141,12 @@ This is a more advanced JSON Definition.
 
 ### 6.1.  Normative References
 
-[RFC7159]  Bray, T., "The JavaScript Object Notation (JSON) Data Interchange Format", RFC 7159, March 2014.
-
-[RFC5234]  Crocker, D. and P. Overell, "Augmented BNF for Syntax Specifications: ABNF", STD 68, RFC 5234, January 2008.
-
-[RFC3986]  Berners-Lee, T., Fielding R., and Masinter, L., "Uniform Resource Identifier (URI): Generic Syntax", RFC3986, January 2005.
-
-[RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate Requirement Levels", BCP 14, RFC 2119, March 1997.
+- [RFC7159]  Bray, T., "The JavaScript Object Notation (JSON) Data Interchange Format", RFC 7159, March 2014.
+- [RFC5234]  Crocker, D. and P. Overell, "Augmented BNF for Syntax Specifications: ABNF", STD 68, RFC 5234, January 2008.
+- [RFC3986]  Berners-Lee, T., Fielding R., and Masinter, L., "Uniform Resource Identifier (URI): Generic Syntax", RFC3986, January 2005.
+- [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate Requirement Levels", BCP 14, RFC 2119, March 1997.
 
 ### 6.2.  Informative References
 
-[ECMA-404] Ecma International, "The JSON Data Interchange Format", Standard ECMA-404, October 2013, <http://www.ecma-international.org/publications/standards/Ecma-404.htm>.
-
-[RFC4627]  Crockford, D., "The application/json Media Type for JavaScript Object Notation (JSON)", RFC 4627, July 2006.
-
-## Authors' Address
-
-Daniel Oskarsson
-JSOND.org
-EMail: daniel@jsond.org
+- [ECMA-404]  Ecma International, "The JSON Data Interchange Format", Standard ECMA-404, October 2013, <http://www.ecma-international.org/publications/standards/Ecma-404.htm>.
+- [RFC4627]  Crockford, D., "The application/json Media Type for JavaScript Object Notation (JSON)", RFC 4627, July 2006.
