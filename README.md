@@ -1,36 +1,162 @@
-# JSOND
-
 ## Introduction
 
-JSOND, _may also be written as_ jsond, is a way of defining JSON using JSON. The structure being defined is created using JSON where values are either a nested object, an array, or a string defining the type of data.
+JSOND is a simple and natural way to define JSON.
 
-### Types
+The purpose of JSOND is to facilitate documentation of JSON text.
 
-Based on the valid values JSOND simply defines the following types:
+JSOND text is JSON text that uses JSOND grammar. JSOND grammar is a superset of JSON grammar. The rest of this document describes the JSOND grammar.
 
-- `"string"`
-- `"number"`
-- `"boolean"`
+1.1.  Conventions Used in This Document
 
-JSOND has the characteristic that it has the exact same structure as the object being defined. The difference between an JSON example and valid JSOND is that example values has been replaced with one of the defined types.
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [RFC2119].
 
-### Property definitions
+The grammatical rules in this document are to be interpreted as described in [RFC4234].
 
-Properties can be defined as optional or allowing the value null. Property definitions appear after the property name definition separated with a colon. There are two valid property definitions:
+## Grammar
 
-- `undefined`
-- `null`
+## Value Types
 
-It is also possible use both undefined and null to define the same property by separating the definitions with the pipe character. When no property definition is supplied the property cannot be neither undefined or null.
+To define a set of JSON values, a JSOND value is a string literals that denotes the primitive type.
 
-## Value definitions
+value = string / boolean / number / integer
 
-In addition to define types, JSOND can also be used to define valid strings, numbers, and content of arrays. Value definitions appear after the type definition separated with a colon. When no value definition is supplied any value of the correct type is considered as valid value.
+Integer is not a primitive type in JSON. It is included in JSOND for pragmatic reasons.
 
+## Value Definitions
+
+JSOND supports defining the value of strings using regular expressions [REF] and numbers using the set or interval notation [REF] as string literals.
+
+value = regular-expression / set-notation / interval-notation
+
+set-notation = begin-object [ number *( value-separator number ) ] end-object
+
+interval-notation = begin-array / begin-parenthesis ( ( number value-separator ) / ( number value-separator number ) / ( value-separator number ) ) end-array / end-parenthesis
+
+number = integer [ frac ] [ exp ]
+integer = [minus] zero / ( digit1-9 *DIGIT )
+
+begin-parenthesis = %x28 ; (
+end-parenthesis = %x29	 ; )
+
+Insignificant whitespace is allowed in both the set and interval notation.
+
+In intervals, the left or right number MAY be omitted. An omitted number represents infinity. Unless the left and/or the right number is explicitly specified using a fraction part and/or an exponent part only integers are considered in that interval. If both the left and right number is specified the right number must be greater than the right number.
+
+Value types are inferred from value definitions.
 
 ### Arrays
 
-The type of values inside an array can be defined. E.g. ["string"] defines that the array should only consist of strings.
-Arrays can be defined using multiple "types" which means that 0 or more of those types are allowed.
-If nothing is defined inside the array it can contain anything. (same for object).
-JSOND does not care about duplicate objects or how many items are in the array.
+JSON arrays MUST consist of zero or more of the structures defined in the JSOND array.
+
+### Value References
+
+JSOND values MAY be stored in a file. Files can be referenced using the file or http protocol [REF]. The protocol is optional if the value can be evaluated as a relative path to a JSOND file.
+
+## Value Constants
+
+A value that not valid JSOND grammar is REQUIRED in the JSON text.
+
+## Optional Pair
+
+A name/value pair can be defined as optional in the JSON text by appending the optional character to the end of the name.
+
+name = string [ optional-character ]
+optional-character = %x3f ; ?
+
+An optional pair is either not part of the JSON text or has a value of null.
+
+## Examples
+
+This is a JSOND object:
+
+```json
+{
+  "Image":{
+      "Width":"number:{0,}",
+      "Height":"number:{0,}",
+      "Title":"string:\w{2,}",
+      "Thumbnail":{
+        "Url":"string:http://www.TODO:regex.com/image/481989943",
+        "Height":"string:\d{3}",
+        "Width":"string:\d{3}"
+      },
+      "IDs":[
+        "number:{0,}"
+      ]
+  }
+}
+```
+
+Its Image member is an object whose Thumbnail member is an object and whose IDs member is an array of positive integers.
+
+This is a JSOND array that may contain objects as defined:
+
+```json
+[
+  {
+    "Precision":"string:^zip$",
+    "Latitude":"number:[-90,90]",
+    "Longitude":"number:[0,180]",
+    "Address":"string",
+    "City":"string",
+    "State":"string:\w{2}",
+    "Zip":"string:\d{5}",
+    "Country":"string:\w{2}"
+  }
+]
+```
+
+This is a simple JSON Definition (JSOND).
+
+would be great with a simple example...
+
+This is a more advanced JSON Definition.
+
+{
+  "image": {
+    "title":    "^View from \d+th Floor$",
+    "width":    "[200.0,)",
+    "height":   "[100.0,)",
+    "thumbnail": {
+      "url":    "http://json.org/url.jsond",
+      "height": 125,
+      "width":  100
+    }
+  },
+  "addresses": [
+    {
+      "precision": "zip",
+      "latitude":  "number",
+      "longitude": "number",
+      "address":   "string",
+      "city":      "[A-Z]+",
+      "state":     "\w\w",
+      "zip":       "\d{5}",
+      "country":   "US"
+    }
+  ]
+}
+
+## References
+
+### 6.1.  Normative References
+
+[RFC7159]  Bray, T., "The JavaScript Object Notation (JSON) Data Interchange Format", RFC 7159, March 2014.
+
+[RFC5234]  Crocker, D. and P. Overell, "Augmented BNF for Syntax Specifications: ABNF", STD 68, RFC 5234, January 2008.
+
+[RFC3986]  Berners-Lee, T., Fielding R., and Masinter, L., "Uniform Resource Identifier (URI): Generic Syntax", RFC3986, January 2005.
+
+[RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate Requirement Levels", BCP 14, RFC 2119, March 1997.
+
+### 6.2.  Informative References
+
+[ECMA-404] Ecma International, "The JSON Data Interchange Format", Standard ECMA-404, October 2013, <http://www.ecma-international.org/publications/standards/Ecma-404.htm>.
+
+[RFC4627]  Crockford, D., "The application/json Media Type for JavaScript Object Notation (JSON)", RFC 4627, July 2006.
+
+## Authors' Address
+
+Daniel Oskarsson
+JSOND.org
+EMail: daniel@jsond.org
