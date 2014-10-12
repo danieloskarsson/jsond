@@ -26,17 +26,17 @@ Integer is not a primitive type in JSON. It is included in JSOND for pragmatic r
 
 JSOND supports defining the value of strings using regular expressions [REF] and numbers using the set or interval notation [REF] as string literals.
 
-value = regular-expression / set-notation / interval-notation
+`value = regular-expression / set-notation / interval-notation`
 
-set-notation = begin-object [ number *( value-separator number ) ] end-object
+`set-notation = begin-object [ number *( value-separator number ) ] end-object`
 
-interval-notation = begin-array / begin-parenthesis ( ( number value-separator ) / ( number value-separator number ) / ( value-separator number ) ) end-array / end-parenthesis
+`interval-notation = begin-array / begin-parenthesis ( ( number value-separator ) / ( number value-separator number ) / ( value-`separator number ) ) end-array / end-parenthesis`
 
-number = integer [ frac ] [ exp ]
-integer = [minus] zero / ( digit1-9 *DIGIT )
+`number = integer [ frac ] [ exp ]`
+`integer = [minus] zero / ( digit1-9 *DIGIT )`
 
-begin-parenthesis = %x28 ; (
-end-parenthesis = %x29	 ; )
+`begin-parenthesis = %x28 ; (`
+`end-parenthesis = %x29	 ; )`
 
 Insignificant whitespace is allowed in both the set and interval notation.
 
@@ -67,50 +67,7 @@ An optional pair is either not part of the JSON text or has a value of null.
 
 ## Examples
 
-This is a JSOND object:
-
-```json
-{
-  "Image":{
-      "Width":"number:{0,}",
-      "Height":"number:{0,}",
-      "Title":"string:\w{2,}",
-      "Thumbnail":{
-        "Url":"string:http://www.TODO:regex.com/image/481989943",
-        "Height":"string:\d{3}",
-        "Width":"string:\d{3}"
-      },
-      "IDs":[
-        "number:{0,}"
-      ]
-  }
-}
-```
-
-Its Image member is an object whose Thumbnail member is an object and whose IDs member is an array of positive integers.
-
-This is a JSOND array that may contain objects as defined:
-
-```json
-[
-  {
-    "Precision":"string:^zip$",
-    "Latitude":"number:[-90,90]",
-    "Longitude":"number:[0,180]",
-    "Address":"string",
-    "City":"string",
-    "State":"string:\w{2}",
-    "Zip":"string:\d{5}",
-    "Country":"string:\w{2}"
-  }
-]
-```
-
-This is a simple JSON Definition (JSOND).
-
-would be great with a simple example...
-
-This is a more advanced JSON Definition.
+This is JSOND text:
 
 {
   "image": {
@@ -136,6 +93,41 @@ This is a more advanced JSON Definition.
     }
   ]
 }
+
+
+```json
+{
+  "Image":{
+      "Width":"number:{0,}",
+      "Height":"number:{0,}",
+      "Title":"string:\w{2,}",
+      "Thumbnail":{
+        "Url":"string:http://www.TODO:regex.com/image/481989943",
+        "Height":"string:\d{3}",
+        "Width":"string:\d{3}"
+      },
+      "IDs":[
+        "number:{0,}"
+      ]
+  }
+}
+```
+
+```json
+[
+  {
+    "Precision":"string:^zip$",
+    "Latitude":"number:[-90,90]",
+    "Longitude":"number:[0,180]",
+    "Address":"string",
+    "City":"string",
+    "State":"string:\w{2}",
+    "Zip":"string:\d{5}",
+    "Country":"string:\w{2}"
+  }
+]
+```
+
 
 ## References
 
