@@ -18,7 +18,7 @@ The grammatical rules in this document are to be interpreted as described in [RF
 
 To define a set of JSON values, a JSOND value is a string literals that denotes the primitive type.
 
-value = string / boolean / number / integer
+`value = string / boolean / number / integer`
 
 Integer is not a primitive type in JSON. It is included in JSOND for pragmatic reasons.
 
@@ -60,8 +60,8 @@ A value that not valid JSOND grammar is REQUIRED in the JSON text.
 
 A name/value pair can be defined as optional in the JSON text by appending the optional character to the end of the name.
 
-name = string [ optional-character ]
-optional-character = %x3f ; ?
+`name = string [ optional-character ]`
+`optional-character = %x3f ; ?`
 
 An optional pair is either not part of the JSON text or has a value of null.
 
@@ -69,6 +69,7 @@ An optional pair is either not part of the JSON text or has a value of null.
 
 This is JSOND text:
 
+```
 {
   "image": {
     "title":    "^View from \d+th Floor$",
@@ -93,7 +94,7 @@ This is JSOND text:
     }
   ]
 }
-
+```
 
 ```json
 {
