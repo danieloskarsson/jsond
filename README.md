@@ -31,51 +31,17 @@ The grammatical rules in this document are to be interpreted as described in [RF
 
 JSOND text is JSON text that includes JSOND grammar. JSOND grammar is a superset of JSON grammar [RFC7159]. The rest of this document describes the JSOND grammar.
 
-## §Values
+## Values
 
 A JSOND value MUST be an object, array or a string literal.
 
 	value = object / array / string-literal
 
-
-
-
-
-—
-The rest of this document describes string literals, 
-
-The string literal MAY be used to define the primitive type.
-
-	string-literal = boolean-string / string-string / number-string / integer-string
-
-	boolean = %x62.6f.6f.6c.65.61.6e		; boolean
-	string = %x73.74.72.69.6e.67				; string
-	number = %x6e.75.6d.62.65.72				; number
-	integer = %x69.6e.74.65.67.65.72		; integer
-
-
-The string literal MAY be used to define the primitive type.
-
-	string-literal = boolean / string / number / integer
-
-	boolean-string = %x62.6f.6f.6c.65.61.6e		; boolean
-	string = %x73.74.72.69.6e.67				; string
-	number = %x6e.75.6d.62.65.72				; number
-	integer = %x69.6e.74.65.67.65.72		; integer
-
-The string literal MAY be used to define a set of strings, or a set and/or interval of numbers and/or integers.
-
-§Optionally the string literal MAY define a subset of strings, numbers, or integers. Type MUST be inferred.
-
- using regular expressions [REGEXP] and numbers using the sets or intervals [ISO_80000-2] as string literals.
-
-Regular expressions, sets and intervals are expressed as string literals.
-
-_Value types are inferred from value definitions._
+§The rest of this section describes string literals, optionals, references and constants.
 
 ## Objects
 
-A JSOND object MUST define all members in the corresponding JSON object.
+A JSOND object MUST define all members in the corresponding JSON object. A JSON object MUST NOT contain a member that has not been defined in the JSOND object.
 
 ## Arrays
 
@@ -313,6 +279,7 @@ array x 2
 
 - Plural vs singular (try to use singular)
 - Which terms should be used and avoided? declared, represents, element, member, key/value, name/value, structure, corresponding, value types, value definitions … (go through these)
+- Types are inferred
 
 - Which informative Regular expression reference to include? This document SHOULD not describe any special type of regular expression.
 - How to reference ISO 80000-2 ? in informational?
