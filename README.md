@@ -28,17 +28,18 @@ A JSOND object MUST define all members in the corresponding JSON object. A JSON 
 
 ## Arrays
 
+§ you might think that you have to repeat yourself
 A JSOND array MUST define all values in the corresponding JSON array. A JSON array element MUST be defined by at least one of the elements in the JSOND array.
 
 ## Booleans
 
-A JSOND “boolean” defines that the JSON value MUST be either true or false.
+A JSOND `"boolean”` defines that the JSON value MUST be either true or false.
 
 	string-literal = %x62.6f.6f.6c.65.61.6e	 ; boolean
 
 ## Strings
 
-A JSOND “string” defines that the JSON value MUST be a string.
+A JSOND `"string”` defines that the JSON value MUST be a string.
 
 	string-literal = %x73.74.72.69.6e.67	 ; string
 
@@ -48,9 +49,9 @@ Regular expressions [REGEXP] MAY be used to define a set of strings.
 
 ## Numbers and Integers
 
-A JSOND “number” defines that the JSON value MUST be a number.
+A JSOND `"number”` defines that the JSON value MUST be a number.
 
-A JSOND “integer” defines that the JSON value MUST be a integer.
+A JSOND `"integer”` defines that the JSON value MUST be a integer.
 
 	string-literal = %x6e.75.6d.62.65.72 / %x69.6e.74.65.67.65.72 ; number / integer
 
@@ -67,9 +68,9 @@ Mathematical sets and/or intervals MAY be used to define a set of numbers [ISO_8
 	number = integer [ frac ] [ exp ]
 	integer = [minus] zero / ( digit1-9 *DIGIT )
 
-An interval that is declared using integers represent the corresponding set of integers. An interval MUST be declared using a number with an explicit decimal component to represent all numbers.
+An interval that is declared using integers defines the corresponding set of integers. An interval MUST be declared using a number with an explicit decimal component to define all numbers.
 
-In an interval the left or right element is OPTIONAL. An undefined left element represents negative infinity. An undefined right element represents positive infinity.
+In an interval the left or right element is OPTIONAL. An undefined left element defines negative infinity. An undefined right element defines positive infinity.
 
 The right element SHOULD be greater than the left element. Insignificant whitespace is allowed.
 
@@ -93,8 +94,6 @@ The protocol is OPTIONAL if the value can be evaluated as a relative path to a J
 ### Constants
 
 A JSOND string literal value that is not valid JSOND grammar SHOULD be interpreted as a value constant and thus REQUIRED in JSON text.
-
-Valid JSON text is also valid JSOND text.
 
 ## References
 
@@ -261,9 +260,11 @@ array x 2
 # Notes:
 
 - Plural vs singular (try to use singular)
-- Which terms should be used and avoided? declared, represents, element, member, key/value, name/value, structure, corresponding, value types, value definitions … (go through these)
+- Which terms should be used and avoided? +declared, ~~represents~~, +element, +member, ~~key/value~~, +name/value, ~~structure~~, +corresponding, ~~value types, value definitions~~ … (go through these)
 - Types are inferred
+- Discuss circular dependencies with references
 
 - Which informative Regular expression reference to include? This document SHOULD not describe any special type of regular expression.
 - How to reference ISO 80000-2 ? in informational?
 - Should references include ABNF
+- Ask for feedback on a grammatical English level as English is not my mother tongue.
