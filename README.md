@@ -1,21 +1,4 @@
 # Introduction
-## Conventions Used in This Document
-# JSOND Grammar
-## Values
-## Objects
-## Arrays
-## Booleans
-## Strings
-## Numbers and Integers
-## Optionals
-## References
-## Constants
-# References
-## Normative References
-## Informative References
-# Appendix A: Examples
-
-# Introduction
 
 JSOND is a simple and natural way to define JSON.
 
