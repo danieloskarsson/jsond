@@ -29,6 +29,31 @@ JSOND was created to support the process of defining JSON structures and replace
 
 JSOND's design goals were for the definitions not only to be valid JSON, but also have the same structure as the JSON structure being defined.
 
+JavaScript Object Notation (JSON) is a text format for the
+serialization of structured data. It is derived from the object
+literals of JavaScript, as defined in the ECMAScript Programming
+Language Standard, Third Edition [ECMA].
+
+JSON can represent four primitive types (strings, numbers, booleans, and null) and two structured types (objects and arrays).
+
+JSOND can define "four primitive types (booleans, strings, numbers, and integers) and two structured types (objects and arrays)."
+
+JSOND takes a pragmatic approach to define JSON.
+
+An object is an unordered collection of zero or more name/value pairs, where a name is a string and a value is a string, number, boolean, null, object, or array.
+
+An array is an ordered sequence of zero or more values.
+
+The terms "object" and "array" come from the conventions of JavaScript.
+
+JSON's design goals were for it to be minimal, portable, textual, and a subset of JavaScript.
+
+A name is a string. A value is a string, object or array.
+
+JSOND (JSON Definition) is a simple and elegant way to define JSON text. The purpose is to aim the process of defining JSON e.g. by writing it on a whiteboard or using a text editor.
+
+JSOND is a superset of JSON. This means that valid JSON text is also valid JSOND text. This also means that valid JSOND text is valid JSON text and can thus be parsed using any JSON parser. Context decides if the text is JSON or JSOND.
+
 :XXX
 
 ## Conventions Used in This Document
@@ -55,7 +80,6 @@ A JSOND object MUST define all members in the corresponding JSON object. A JSON 
 
 A JSOND array MUST define a list of JSOND values in such way that all corresponding JSON array values are defined by at least one of the values in the JSOND array.
 
-§Arrays can be defined using multiple "types" which means that 0 or more of those types are allowed.
 §JSOND does not care about duplicate objects or how many items are in the array.
 
 ## Booleans
@@ -67,26 +91,26 @@ A JSOND `"boolean"` defines that the JSON value MUST be either true or false.
 
 ## Strings
 
-A JSOND `"string"` defines that the JSON value MUST be a string.
+A JSOND `"string"` defines that the JSON value MUST be any string.
 
 	string-literal = string
 	string = %x73.74.72.69.6e.67	     ; string
 
-Regular expressions [REGEXP] MAY be used to define a set of strings.
+Regular expressions [REGEX] MAY be used to define a subset of strings.
 
 	string-literal = regular-expression
 
 ## Numbers and Integers
 
-A JSOND `"number"` defines that the JSON value MUST be a number.
+A JSOND `"number"` defines that the JSON value MUST be any number.
 
-A JSOND `"integer"` defines that the JSON value MUST be a integer.
+A JSOND `"integer"` defines that the JSON value MUST be any integer.
 
 	string-literal = number / integer
 	number = %x6e.75.6d.62.65.72     ; number
 	integer = %x69.6e.74.65.67.65.72	 ; integer
 
-Mathematical sets and/or intervals [ISO-80000-2] MAY be used to define a set of numbers.
+Mathematical sets and/or intervals [ISO-80000-2] MAY be used to define a subset of numbers.
 
 	string-literal = *( set / interval )
 
@@ -135,18 +159,28 @@ A JSOND value MAY be stored in a file. A file MUST be referenced using the file 
 
 The protocol is OPTIONAL if the value can be evaluated as a relative path to a JSOND file.
 
+
+§ and referenced from other JSOND files as if it's content was included in the referencing document.
+
 ### Constants
 
-A JSOND string literal value that is not valid JSOND grammar SHOULD be interpreted as a value constant and is thus REQUIRED in JSON text.
+A JSOND value that is not valid JSOND grammar SHOULD be interpreted as a value constant and is thus REQUIRED in JSON text.
 
-XXX: A JSOND value definition can be stored in a file and referenced from other JSOND files as if it's content was included in the referencing document.
+XXX:
+It should also be noticed that while not being a JSOND value null, true, false and numbers are interpreted by JSOND validators.
 
-XXX: It should also be noticed that while not being a JSOND value null, true, false and numbers are interpreted by JSOND validators.
+Most (§all?) string literals are valid regular expressions.
 
-XXX: Most string literals are valid regular expressions.
+This might be hard to actually have working since almost every expression is a regular expression. For normal things that is the same thing. For other strings that contain regular expression special things, this will be the most common error.
 
-XXX: This might be hard to actually have working since almost every expression is a regular expression. For normal things that is the same thing. For other strings that contain regular expression special things, this will be the most common error.
-XXX: It actually works for null, true, false and such things
+It actually works for null, true, false and such things
+
+Definitions can be reused by referencing a JSOND file using the http or file protocol. JSOND files should have the file suffix .jsond and the mime-type application/jsond.
+
+A JSOND document that is valid JSON is never invalid. Each member is evaluated separately and if a value does not make sense to JSOND, e.g. a invalid regular expression, the value for the name is considered to be a string that consists of exactly that invalid regular expression.
+
+A JSOND parser SHOULD warn for this.
+:XXX
 
 ## References
 
@@ -166,6 +200,7 @@ XXX: It actually works for null, true, false and such things
 §IEEE.1003-2.1992 there is no good source to say this is the standard for regex BREX PCEX, ...
 §Regular expressions SHOULD follow the regular expression
    specification from ECMA 262/Perl 5
+
 ## Appendix: Examples
 
 When defining JSON focus SHOULD be on defining the objects and members and it is RECOMMENDED to omit the details. The example below defines a list of products.
@@ -238,68 +273,4 @@ An example of corresponding JSON.
 		"url": "www.example.com/product2"
 	}
 ]
-```
-
-Sending JSOND to a system as a way to search.
-JSOND for Configuration for a system of some kind.
-
-# Notes:
-
-- Plural vs singular (try to use singular)
-- Which terms should be used and avoided? +declared, ~~represents~~, +element, +member, ~~key/value~~, +name/value, ~~structure~~, +corresponding, ~~value types, value definitions~~, allowed(1), +undefined, +null … (go through these)
-- Types are inferred
-- Discuss circular dependencies with references
-- Is it possible to write JSOND in JSOND? E.g. to define the type of JSOND that can be sent to do a search.
-- In JSOND numbers are considered to be Integers unless a decimal component is explicitly defined.
-- It is possible to further define the real number using a set [80000-2:5:2-5.3] of real numbers, or interval [80000-2:6:2-6.7to2-6.12] of real numbers.
-- ( is called exclusion bracket
-[ is called inclusive bracket
-- _keys for comments, however it might be tempting to use this as a parser instruction
-
-- Which informative Regular expression reference to include? This document SHOULD not describe any special type of regular expression.
-- How to reference ISO 80000-2 ? in informational?
-- Should references include ABNF
-- Ask for feedback on a grammatical English level as English is not my mother tongue.
-
-# Implementation:
-
-- How would I implement a validator of JSON Grammar? This is probably an exercise to do while waiting for a response from Tim (if any). How about creating (Python) types for a regex, set, interval, string, boolean, optional, number, integer, etc.. and check the json for those. Use REGEX to validate? Do I need this?
-	- I do need this to make validation easy in python, if each type is a class I can just pass in the json value and report anything that doesn’t match as an error.
-	- Print warning if string beings with [ but wasn’t 
-
-```python
-
-''' 
-switch doesn't work
-how about different methods for each or at least the difficult types?
-string should probably be the last type
-
-name is null for the root value
-use the fact that python probably knows how to map an integer or number from json to python internal. e.g. unwrap from within string and use json.loads to create a python representation to do that. That way there is no need for a regex for a number.
-Write the library that does parse sets and integers separately?
-
-'''
-def recursive(name,value):
-	type = type(value)
-	if type == object:
-		for each name,value in object:
-			recursive(name,value)
-	elif type == array:
-		for each value in array:
-			recursive(name, value)
-	elif type == boolean:
-			
-	elif type == string:
-
-	elif type == number:
-
-	elif type == integer:
-		
-
-throw if not valid JSON
-jsond = json.loads(text)
-recursive(null, jsond)
-
-
-
 ```
