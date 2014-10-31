@@ -1,8 +1,10 @@
 
 # Notes:
 
+- OVERRIDE build in types by creating a file named "string", "boolean", etc…? SHOULD probably not be allowed. I.e. use .jsond to make it explicit that an explicit type is used. This is a reason for WHY you should use .jsond for custom types/references.
+	- "There are four build in types "string", "integer", "number", "boolean", it is possible to define your own types. These should be stored in files with the .jsond suffix."
 - Plural vs singular (try to use singular)
-- Which terms should be used and avoided? +declared, ~~represents~~, +element, +member, ~~key/value~~, +name/value, ~~structure~~, +corresponding, ~~value types, value definitions~~, allowed(1), +undefined, +null … (go through these)
+- Which terms should be used and avoided? +declared, ~~represents~~, +element, +member, ~~key/value~~, +name/value, ~~structure~~, +corresponding, ~~value types, value definitions~~, allowed(1), +undefined, +null, sequence …
 - Types are inferred
 - Discuss circular dependencies with references
 - Is it possible to write JSOND in JSOND? E.g. to define the type of JSOND that can be sent to do a search.
@@ -20,6 +22,7 @@ optional <-english
 skip the .jsond filename? as in "$ref": "http://json-schema.org/geo"
 Sending JSOND to a system as a way to search.
 JSOND for Configuration for a system of some kind.
+- talk about strings instead of string literals?
 
 - Which informative Regular expression reference to include? This document SHOULD not describe any special type of regular expression.
 - How to reference ISO 80000-2 ? in informational?
@@ -154,3 +157,37 @@ Interact with examplessidan för att leka med jsond. Validate json? Generate jso
 
 
 
+
+
+
+
+
+{
+  "percent":"[0,100]"
+  "percent":"[0.0,1.0]"
+  "binary":"[0,1]"
+}
+
+
+An example of corresponding JSON.
+
+```
+[
+	{
+		"id": 1,
+		"name": "product1",
+		"category": "categoryOne"
+		"price": "1.25",
+		"onsale": "true",
+		"url": "www.example.com/product1"
+	},
+	{
+		"id": 2,
+		"name": "product2",
+		"category": "category2"
+		"price": "5.99",
+		"onsale": "false",
+		"url": "www.example.com/product2"
+	}
+]
+```
