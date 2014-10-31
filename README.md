@@ -1,34 +1,10 @@
-# §Introduction
+# Introduction
 
-JSOND is a natural way to define JSON.
+JSOND (JSON Definition) is a simple, yet powerful, definition language for JSON text.
 
-The purpose of JSOND is to facilitate documentation.
+The purpose of JSOND is to facilitate development and documentation of JSON text. To replace example values and enable validation.
 
 JSOND is designed to be a minimal superset of JSON.
-
-XXX:
-
-JSOND (JSON Definition) is a simple and elegant/natural way to define JSON text. The purpose is to aim the process of defining JSON e.g. by writing it on a whiteboard or using a text editor.
-
-JSOND, is a way of defining JSON using JSON. The structure being defined is created using JSON where values are either a nested object, an array, or a string defining the type of data.
-
-JSON Definition (JSOND) is a language for defining a JSON structure using a JSON structure formatted according to a few simple rules described in this document.
-
-JSON Definition (JSOND) is a natural way of defining JSON using JSON.
-
-It is a simple, yet powerful, definition language conceived to facilitate discussions, replace the use of examples, and enable model generation and validation of JSON structures.
-
-It has been designed to be a simple and practical way to define JSON on a whiteboard or in documentation.
-
-
-JSOND was created to support the process of defining JSON structures and replace the use of JSON examples in API documentation, but can also be used to validate existing JSON and generate models in any programming language that support the corresponding JSON data types.
-
-JSOND's design goals were for the definitions not only to be valid JSON, but also have the same structure as the JSON structure being defined.
-
-JSON's design goals were for it to be minimal, portable, textual, and a subset of JavaScript.
-
-
-:XXX
 
 ## Conventions Used in This Document
 
@@ -38,7 +14,7 @@ The grammatical rules in this document are to be interpreted as described in [RF
 
 # JSOND Grammar
 
-JSOND text is JSON text that MAY include JSOND grammar. JSOND grammar is a superset of JSON grammar [RFC7159]. The rest of this document describes the JSOND grammar.
+JSOND text is JSON text that MAY include JSOND grammar. JSOND grammar is a superset of JSON grammar [RFC7159][RFC4627][ECMA-404]. The rest of this document describes the JSOND grammar.
 
 ## Values
 
@@ -52,7 +28,7 @@ A JSOND object MUST define all members in the corresponding JSON object. A JSON 
 
 ## Arrays
 
-A JSOND array MUST define a list/sequence of values in such way that all corresponding JSON array values are defined by at least one of the values in the JSOND array.
+A JSOND array MUST define a sequence of values in such way that all corresponding JSON array values are defined by at least one of the values in the JSOND array.
 
 ## Booleans
 
@@ -70,7 +46,7 @@ A JSOND "string" defines that the JSON value MUST be any string.
 
 	string = %x73.74.72.69.6e.67	     ; string
 
-Regular expressions [REGEX] MAY be used to define a subset of strings.
+Regular expressions [ECMA-262] MAY be used to define a subset of strings.
 
 	string-literal = regular-expression
 
@@ -102,11 +78,11 @@ An arbitrary number of mathematical sets and intervals [ISO-80000-2] MAY be used
 
 	end-parenthesis = %x29   ; )
 
+Set and interval elements SHOULD be ordered in increasing order from the least to the greatest element.
+
 An interval that is declared using integers defines the corresponding subset of integers. An interval MUST be declared using at least one number with an explicit decimal component to define a subset of real numbers. The decimal component MAY be .0.
 
 In an interval the left or right element is OPTIONAL. An undefined left element defines negative infinity. An undefined right element defines positive infinity.
-
-The right element SHOULD be greater than the left element.
 
 Insignificant whitespace MAY be used before, within, between, and after sets and intervals.
 
@@ -127,24 +103,11 @@ Any JSOND value MAY be persisted as a file. A file MAY be referenced using an re
 
 JSOND files SHOULD have the filename extension .jsond.
 
-### §Constants
+### Constants
 
 A value that is not valid JSOND grammar SHOULD be interpreted as a value constant and thus REQUIRED in JSON text.
 
-Most string literals are valid regular expressions.
-
-CONSTANTS :
-the only constants are null, true, false
-
-It actually works for null, true, false and such things.
-
-The most common error will be string literals that are interpreted as regular expressions but was misspelled.
-
-A JSOND parser SHOULD warn for this.
-
-§JSOND is a superset of JSON. This means that valid JSON text is also valid JSOND text. This also means that valid JSOND text is valid JSON text and can thus be parsed using any JSON parser. Context decides if the text is JSON or JSOND.
-
-: CONSTANTS
+Most string literals are valid regular expressions. The values true, false, and null are not valid JSOND grammar.
 
 ## References
 
@@ -155,15 +118,12 @@ A JSOND parser SHOULD warn for this.
 - [RFC3986]  Berners-Lee, T., Fielding R., and Masinter, L., "Uniform Resource Identifier (URI): Generic Syntax", RFC 3986, January 2005.
 - [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate Requirement Levels", BCP 14, RFC 2119, March 1997.
 
-### §Informative References
+### Informative References
 
 - [ECMA-404]  Ecma International, "The JSON Data Interchange Format", Standard ECMA-404, October 2013, <http://www.ecma-international.org/publications/standards/Ecma-404.htm>.
+- [ECMA-262]  Ecma International, "ECMAScript® Language Specification", Standard ECMA-262, June 2011, <http://www.ecma-international.org/publications/standards/Ecma-262.htm>.
+- [ISO-80000-2]  International Organization for Standardization, "Quantities and units — Part 2: Mathematical signs and symbols to be used in the natural sciences and technology", Standard ISO 80000-2:2009, December 2009, <http://www.iso.org/iso/home/store/catalogue_tc/catalogue_tc_browse.htm?commid=46202>.
 - [RFC4627]  Crockford, D., "The application/json Media Type for JavaScript Object Notation (JSON)", RFC 4627, July 2006.
-- [ISO-80000-2] http://www.iso.org/iso/home/store/catalogue_tc/catalogue_tc_browse.htm?commid=46202
-- [REGEX] http://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap09.html
-§IEEE.1003-2.1992 there is no good source to say this is the standard for regex BREX PCEX, ...
-§Regular expressions SHOULD follow the regular expression
-   specification from ECMA 262/Perl 5
 
 ## §Appendix: Examples
 
@@ -181,7 +141,7 @@ Basic use of JSOND is to replace literal example values with "boolean", "string"
 	}
 ]
 ```
-_Example 1: Basic JSOND that defines a list of products._
+_Example 1: Basic JSOND that defines a sequence of products._
 
 Advanced use of JSOND MAY include regular expressions, mathematical sets and intervals, optionals, references, and constants as in Example 2.
 
@@ -198,9 +158,9 @@ Advanced use of JSOND MAY include regular expressions, mathematical sets and int
 	}
 ]
 ```
-_Example 2: Advanced JSOND that defines a list of products._
+_Example 2: Advanced JSOND that defines a sequence of products._
 
-Example 2 defines that for each product in the list:
+Example 2 defines that for each product in the sequence:
 
 - id MUST be any integer greater than or equal to zero
 - slug MUST only consist of letters a-z and digits 0-9
@@ -217,7 +177,5 @@ The value for url is defined in url.jsond in Example 3.
 ```
 _Example 3: url.jsond_
 
-url -> date
-constant
-remove reference from example 2? to be used in own example
+§url -> date which one to use that is accepted through the world?
 

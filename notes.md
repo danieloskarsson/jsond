@@ -4,7 +4,7 @@
 - OVERRIDE build in types by creating a file named "string", "boolean", etc…? SHOULD probably not be allowed. I.e. use .jsond to make it explicit that an explicit type is used. This is a reason for WHY you should use .jsond for custom types/references.
 	- "There are four build in types "string", "integer", "number", "boolean", it is possible to define your own types. These should be stored in files with the .jsond suffix."
 - Plural vs singular (try to use singular)
-- Which terms should be used and avoided? +declared, ~~represents~~, +element, +member, ~~key/value~~, +name/value, ~~structure~~, +corresponding, ~~value types, value definitions~~, allowed(1), +undefined, +null, sequence …
+- Which terms should be used and avoided? +declared, ~~represents~~, +element, +member, ~~key/value~~, ~~name/value~~, ~~structure~~, +corresponding, ~~value types, value definitions~~, ~~allowed~~, +undefined, +null, ~~list~~ +sequence …
 - Types are inferred
 - Discuss circular dependencies with references
 - Is it possible to write JSOND in JSOND? E.g. to define the type of JSOND that can be sent to do a search.
@@ -29,6 +29,7 @@ JSOND for Configuration for a system of some kind.
 - Should references include ABNF
 - Ask for feedback on a grammatical English level as English is not my mother tongue.
 - mime-type application/jsond
+- 
 
 §there might but shouldn't be a problem in sending numbers with .0 (libraries might remove them! (they shouldn't)) python doesn't!
 
