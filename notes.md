@@ -28,6 +28,9 @@ JSOND for Configuration for a system of some kind.
 - How to reference ISO 80000-2 ? in informational?
 - Should references include ABNF
 - Ask for feedback on a grammatical English level as English is not my mother tongue.
+- mime-type application/jsond
+
+§there might but shouldn't be a problem in sending numbers with .0 (libraries might remove them! (they shouldn't)) python doesn't!
 
 # Implementation:
 

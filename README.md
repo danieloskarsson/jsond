@@ -36,13 +36,9 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "S
 
 The grammatical rules in this document are to be interpreted as described in [RFC5234].
 
-# §JSOND Grammar
+# JSOND Grammar
 
 JSOND text is JSON text that MAY include JSOND grammar. JSOND grammar is a superset of JSON grammar [RFC7159]. The rest of this document describes the JSOND grammar.
-
-§The JSON structure being defined is itself a JSON structure.
-
-§JSOND is a superset of JSON. This means that valid JSON text is also valid JSOND text. This also means that valid JSOND text is valid JSON text and can thus be parsed using any JSON parser. Context decides if the text is JSON or JSOND.
 
 ## Values
 
@@ -63,6 +59,7 @@ A JSOND array MUST define a list/sequence of values in such way that all corresp
 A JSOND "boolean" defines that the JSON value MUST be either true or false.
 
 	string-literal = boolean
+
 	boolean = %x62.6f.6f.6c.65.61.6e	 ; boolean
 
 ## Strings
@@ -70,23 +67,26 @@ A JSOND "boolean" defines that the JSON value MUST be either true or false.
 A JSOND "string" defines that the JSON value MUST be any string.
 
 	string-literal = string
+
 	string = %x73.74.72.69.6e.67	     ; string
 
 Regular expressions [REGEX] MAY be used to define a subset of strings.
 
 	string-literal = regular-expression
 
-## §Numbers and Integers
+## Numbers and Integers
 
 A JSOND "number" defines that the JSON value MUST be any number.
 
 A JSOND "integer" defines that the JSON value MUST be any integer.
 
 	string-literal = number / integer
+
 	number = %x6e.75.6d.62.65.72     ; number
+
 	integer = %x69.6e.74.65.67.65.72	 ; integer
 
-Mathematical sets and/or intervals [ISO-80000-2] MAY be used to define a subset of numbers.
+An arbitrary number of mathematical sets and intervals [ISO-80000-2] MAY be used to define a subset of numbers.
 
 	string-literal = *( set / interval )
 
@@ -94,30 +94,21 @@ Mathematical sets and/or intervals [ISO-80000-2] MAY be used to define a subset 
 
 	interval = begin-array / begin-parenthesis ( ( number-literal value-separator ) / ( number-literal value-separator number-literal ) / ( value-separator number-literal ) ) end-array / end-parenthesis
 
-	begin-parenthesis = %x28	 ; (
-	end-parenthesis = %x29   ; )
-
 	number-literal = integer-literal [ frac ] [ exp ]
+
 	integer-literal = [minus] zero / ( digit1-9 *DIGIT )
 
-An interval that is declared using only integers defines a subset of integers. An interval that is declared with at least one number with an explicit decimal component defines a subset of numbers.
+	begin-parenthesis = %x28	 ; (
 
-§An interval that is declared using integers defines the corresponding subset of integers. An interval MUST be declared using at least one number with an explicit decimal component to define a subset of real numbers.
+	end-parenthesis = %x29   ; )
+
+An interval that is declared using integers defines the corresponding subset of integers. An interval MUST be declared using at least one number with an explicit decimal component to define a subset of real numbers. The decimal component MAY be .0.
 
 In an interval the left or right element is OPTIONAL. An undefined left element defines negative infinity. An undefined right element defines positive infinity.
 
-§there might but shouldn't be a problem in sending numbers with .0 (libraries might remove them!)
+The right element SHOULD be greater than the left element.
 
-§If no number is specified with a decimal component an integer SHOULD be assumed. If only integers is used to define an interval, only the list of integers SHOULD be be assumed.
-
-§JSOND automatically assumes all numbers to be integers.
- If any number is allowed numbers must/should be written with a decimal component.
-
-§A decimal mark is a symbol used to separate the integer part from the fractional
- part of a number written in decimal form.
-
-
-The right element SHOULD be greater than the left element. Insignificant whitespace is allowed.
+Insignificant whitespace MAY be used before, within, between, and after sets and intervals.
 
 ## Optionals
 
@@ -128,36 +119,32 @@ A member can be defined as optional by appending the optional-character to the e
 
 An optional member MAY have the value null. An optional member MAY be undefined in JSON text.
 
-### §References
+### References
 
-A JSOND value MAY be stored in a file. A file MUST be referenced using the file or http(s) protocol [RFC3986].
+Any JSOND value MAY be persisted as a file. A file MAY be referenced using an relative file path. A file MAY be referenced using an absolute path. A file MAY be referenced using the http or https scheme [RFC3986].
 
-	string-literal = [ protocol ] file
+	string-literal = [ scheme ] path
 
-The protocol is OPTIONAL if the value can be evaluated as a relative path to a JSOND file.
-
-
-§ and referenced from other JSOND files as if it's content was included in the referencing document.
-
-§Definitions can be reused by referencing a JSOND file using the http or file protocol. JSOND files should have the file suffix .jsond and the mime-type application/jsond.
+JSOND files SHOULD have the filename extension .jsond.
 
 ### §Constants
 
-A value that is not valid JSOND grammar SHOULD be interpreted as a value constant and is thus REQUIRED in JSON text.
+A value that is not valid JSOND grammar SHOULD be interpreted as a value constant and thus REQUIRED in JSON text.
 
-XXX:
-It should also be noticed that while not being a JSOND value null, true, false and numbers are interpreted by JSOND validators.
+Most string literals are valid regular expressions.
 
-Most (§all?) string literals are valid regular expressions.
+CONSTANTS :
+the only constants are null, true, false
 
-This might be hard to actually have working since almost every expression is a regular expression. For normal things that is the same thing. For other strings that contain regular expression special things, this will be the most common error.
+It actually works for null, true, false and such things.
 
-It actually works for null, true, false and such things
-
-A JSOND document that is valid JSON is never invalid. Each member is evaluated separately and if a value does not make sense to JSOND, e.g. a invalid regular expression, the value for the name is considered to be a string that consists of exactly that invalid regular expression.
+The most common error will be string literals that are interpreted as regular expressions but was misspelled.
 
 A JSOND parser SHOULD warn for this.
-:XXX
+
+§JSOND is a superset of JSON. This means that valid JSON text is also valid JSOND text. This also means that valid JSOND text is valid JSON text and can thus be parsed using any JSON parser. Context decides if the text is JSON or JSOND.
+
+: CONSTANTS
 
 ## References
 
@@ -168,7 +155,7 @@ A JSOND parser SHOULD warn for this.
 - [RFC3986]  Berners-Lee, T., Fielding R., and Masinter, L., "Uniform Resource Identifier (URI): Generic Syntax", RFC 3986, January 2005.
 - [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate Requirement Levels", BCP 14, RFC 2119, March 1997.
 
-### Informative References
+### §Informative References
 
 - [ECMA-404]  Ecma International, "The JSON Data Interchange Format", Standard ECMA-404, October 2013, <http://www.ecma-international.org/publications/standards/Ecma-404.htm>.
 - [RFC4627]  Crockford, D., "The application/json Media Type for JavaScript Object Notation (JSON)", RFC 4627, July 2006.
@@ -180,13 +167,13 @@ A JSOND parser SHOULD warn for this.
 
 ## §Appendix: Examples
 
-Basic use of JSOND is as simple as replacing literal example values with string literals that define the value type.
+Basic use of JSOND is to replace literal example values with "boolean", "string", "number", and "integer" as in Example 1.
 
 ```
 [
 	{
 		"id": "integer",
-		"name": "string",
+		"slug": "string",
 		"category": "string",
 		"price": "number",
 		"reduced": "boolean",
@@ -194,39 +181,43 @@ Basic use of JSOND is as simple as replacing literal example values with string 
 	}
 ]
 ```
+_Example 1: Basic JSOND that defines a list of products._
 
-§The example below defines a list of products.
-
-Values can be constrained …
-
-More advanced use of JSOND …
-
-Types are inferred.
+Advanced use of JSOND MAY include regular expressions, mathematical sets and intervals, optionals, references, and constants as in Example 2.
 
 ```
 [
 	{
 		"id": "[0,)",
-		"name": "[a-z0-9]",
-		"category": "^(category1|category2)$",
+		"slug": "[a-z0-9]",
+		"category": "{10,25,50}",
 		"price": "(0.0,)",
 		"reduced?": "boolean",
+		"constant": true,
 		"url": "http://jsond.org/url.jsond"
 	}
 ]
 ```
+_Example 2: Advanced JSOND that defines a list of products._
 
-In the example above id MUST be any integer greater than or equal to zero, name MUST only consist of letters a-z and digits 0-9, category MUST be category1 or category2, price MUST be any positive number greater than zero, reduced member MUST be true, false, null or undefined, url is defined by the referenced url.jsond.
+Example 2 defines that for each product in the list:
 
-```url.jsond
+- id MUST be any integer greater than or equal to zero
+- slug MUST only consist of letters a-z and digits 0-9
+- category MUST be either 10, 25, or 50
+- price MUST be any positive number greater than zero
+- reduced MUST be true, false, null or undefined
+- constant MUST be true
+- url is defined by the referenced file url.jsond
+
+The value for url is defined in url.jsond in Example 3.
+
+```
 "^https?:// \.[a-z]{2,}"
 ```
-
+_Example 3: url.jsond_
 
 url -> date
-name -> slug
-category -> set
 constant
-
-[1,5]{7,9}
+remove reference from example 2? to be used in own example
 
