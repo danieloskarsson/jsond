@@ -125,9 +125,9 @@ Most string literals are valid regular expressions. The values true, false, and 
 - [ISO-80000-2]  International Organization for Standardization, "Quantities and units — Part 2: Mathematical signs and symbols to be used in the natural sciences and technology", Standard ISO 80000-2:2009, December 2009, <http://www.iso.org/iso/home/store/catalogue_tc/catalogue_tc_browse.htm?commid=46202>.
 - [RFC4627]  Crockford, D., "The application/json Media Type for JavaScript Object Notation (JSON)", RFC 4627, July 2006.
 
-## §Appendix: Examples
+## Appendix: Examples
 
-Basic use of JSOND is to replace literal example values with "boolean", "string", "number", and "integer" as in Example 1.
+Basic use of JSOND is to use JSOND string literals "boolean", "string", "number", and "integer" as values as in Example 1.
 
 ```
 [
@@ -141,9 +141,9 @@ Basic use of JSOND is to replace literal example values with "boolean", "string"
 	}
 ]
 ```
-_Example 1: Basic JSOND that defines a sequence of products._
+_Example 1: Basic JSOND that defines a sequence of zero or more products._
 
-Advanced use of JSOND MAY include regular expressions, mathematical sets and intervals, optionals, references, and constants as in Example 2.
+Advanced use of JSOND MAY include use of regular expressions, mathematical sets and intervals, optionals, references, and constants as values as in Example 2.
 
 ```
 [
@@ -158,7 +158,7 @@ Advanced use of JSOND MAY include regular expressions, mathematical sets and int
 	}
 ]
 ```
-_Example 2: Advanced JSOND that defines a sequence of products._
+_Example 2: Advanced JSOND that defines a sequence of zero or more products._
 
 Example 2 defines that for each product in the sequence:
 
@@ -173,9 +173,6 @@ Example 2 defines that for each product in the sequence:
 The value for url is defined in url.jsond in Example 3.
 
 ```
-"^https?:// \.[a-z]{2,}"
+"^https?://[^\.]+\.[a-z]{2,}"
 ```
 _Example 3: url.jsond_
-
-§url -> date which one to use that is accepted through the world?
-
