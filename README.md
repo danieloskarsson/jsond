@@ -14,7 +14,7 @@ The grammatical rules in this document are to be interpreted as described in [RF
 
 # JSOND Grammar
 
-JSOND text is JSON text that MAY include JSOND grammar. JSOND grammar is a superset of JSON grammar [RFC7159][RFC4627][ECMA-404]. The rest of this document describes the JSOND grammar.
+JSOND text is JSON text that MAY include JSOND grammar. JSOND grammar is a superset of JSON grammar [RFC7159] [RFC4627] [ECMA-404]. The rest of this document describes the JSOND grammar.
 
 ## Values
 
