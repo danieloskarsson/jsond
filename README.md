@@ -2,7 +2,7 @@
 
 JSOND (JSON Definition) is a simple, yet powerful, definition language for JSON text.
 
-The purpose of JSOND is to facilitate development and documentation of JSON text. To replace example values and enable validation.
+The purpose of JSOND is to facilitate development and documentation of JSON text.
 
 JSOND is designed to be a minimal superset of JSON.
 
