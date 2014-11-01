@@ -35,6 +35,7 @@ A JSOND array MUST define a sequence of values in such way that all correspondin
 A JSOND "boolean" defines that the JSON value MUST be either true or false.
 
 	string-literal = boolean
+
 	boolean = %x62.6f.6f.6c.65.61.6e	 ; boolean
 
 ## Strings
@@ -42,6 +43,7 @@ A JSOND "boolean" defines that the JSON value MUST be either true or false.
 A JSOND "string" defines that the JSON value MUST be any string.
 
 	string-literal = string
+
 	string = %x73.74.72.69.6e.67	     ; string
 
 Regular expressions [ECMA-262] MAY be used to define a subset of strings.
@@ -55,6 +57,7 @@ A JSOND "number" defines that the JSON value MUST be any number.
 A JSOND "integer" defines that the JSON value MUST be any integer.
 
 	string-literal = number / integer
+
 	number = %x6e.75.6d.62.65.72     ; number
 	integer = %x69.6e.74.65.67.65.72	 ; integer
 
