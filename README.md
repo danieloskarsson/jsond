@@ -95,6 +95,8 @@ Any JSOND value MAY be persisted as a file. A file SHOULD be referenced using a 
 
 JSOND files SHOULD have the filename extension .jsond.
 
+Circular references SHOULD be avoided.
+
 ## Constants
 
 A value that is not valid JSOND grammar SHOULD be interpreted as a constant and thus REQUIRED in the corresponding JSON text.
