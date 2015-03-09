@@ -1,9 +1,13 @@
 
 
-Internet Engineering Task Force                            D. Oskarsson
-Internet-Draft                                                JSOND.org
-Intended status: Informational                            March 9, 2015
 
+
+
+
+Internet Engineering Task Force                             D. Oskarsson
+Internet-Draft                                                 JSOND.org
+Intended status: Informational                             March 9, 2015
+Expires: August 5, 2015
 
             JavaScript Object Notation Definition (JSOND) 
 
@@ -51,6 +55,10 @@ Copyright Notice
    The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
    "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
    document are to be interpreted as described in RFC 2119 [RFC2119].
+
+Oskarsson                Expires August 5, 2015                 [Page 1]
+
+Internet-Draft                   JSOND                        March 2015
 
 2.  JSOND Grammar
 
@@ -106,6 +114,10 @@ Copyright Notice
 
       value = %x22.6e.75.6d.62.65.72.22        ; "number"
 
+Oskarsson                Expires August 5, 2015                 [Page 2]
+
+Internet-Draft                   JSOND                        March 2015
+
    A JSOND integer defines that the corresponding JSON value MUST be
    any integer.
 
@@ -158,9 +170,12 @@ Copyright Notice
 
    value = %x22 [ scheme ] path %x22           ; e.g. "file.jsond"
 
-   JSOND files SHOULD have the filename extension .jsond.
+   JSOND files SHOULD have the filename extension .jsond. Circular
+   references SHOULD be avoided.
 
-   Circular references SHOULD be avoided.
+Oskarsson                Expires August 5, 2015                 [Page 3]
+
+Internet-Draft                   JSOND                        March 2015
 
 2.6.  Constants
 
@@ -185,30 +200,14 @@ Copyright Notice
 
 3.  IANA Considerations
 
-   The MIME media type for JSOND text is application/json.
-
-   Type name:  application
-
-   Subtype name:  json
-
-   Required parameters:  n/a
-
-   Optional parameters:  n/a
-
-   Encoding considerations:  binary
-
-   Security considerations:  See [RFC7159], Section 12.
-
-   Interoperability considerations:  Described in [RFC7159]
-
-      Additional information:
+   Additional information:
       Magic number(s): n/a
-      File extension(s): .json
+      File extension(s): .jsond
       Macintosh file type code(s): TEXT
 
 4.  Security Considerations
 
-   See Security Considerations in Section 6.
+   See Security Considerations in [RFC7159] Section 12.
 
 5.  References
 
@@ -228,6 +227,10 @@ Copyright Notice
               Interchange Format", RFC 7159, March 2014.
 
 5.2.  Informative References
+
+Oskarsson                Expires August 5, 2015                 [Page 4]
+
+Internet-Draft                   JSOND                        March 2015
 
    [ECMA-404] Ecma International, "The JSON Data Interchange Format",
               Standard ECMA-404, October 2013, <http://www.ecma-
