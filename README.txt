@@ -1,217 +1,287 @@
-# Introduction
 
-JSOND (JSON Definition) is a simple, yet powerful, definition language
-for JSON text.
 
-The purpose of JSOND is to facilitate development and documentation of
-JSON text.
+Internet Engineering Task Force                            D. Oskarsson
+Internet-Draft                                                JSOND.org
+Intended status: Informational                            March 9, 2015
 
-JSOND is designed to be a minimal superset of JSON.
 
-## Conventions Used in This Document
+            JavaScript Object Notation Definition (JSOND) 
 
-The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
-"SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
-document are to be interpreted as described in [RFC2119].
+Abstract
 
-The grammatical rules in this document are to be interpreted as
-described in [RFC5234].
+   JSOND (JSON Definition) is a simple, yet powerful, definition
+   language for JSON text.
 
-# JSOND Grammar
+Copyright Notice
 
-JSOND text is JSON text that MAY include JSOND grammar. JSOND grammar is
-a superset of JSON grammar [RFC7159] [RFC4627] [ECMA-404]. The rest of
-this document describes the JSOND grammar.
+   Copyright (c) 2015 IETF Trust and the persons identified as the
+   document authors. All rights reserved.
 
-## Values
+   This document is subject to BCP 78 and the IETF Trust's Legal
+   Provisions Relating to IETF Documents
+   (http://trustee.ietf.org/license-info) in effect on the date of
+   publication of this document. Please review these documents
+   carefully, as they describe your rights and restrictions with
+   respect to this document."
 
-A JSOND value MUST be an object, array or a string literal.
+   This Internet-Draft is submitted in full conformance with the
+   provisions of BCP 78 and BCP 79. Internet-Drafts are working
+   documents of the Internet Engineering Task Force (IETF). Note that
+   other groups may also distribute working documents as Internet-
+   Drafts. The list of current Internet-Drafts is at
+   http://datatracker.ietf.org/drafts/current.
 
-	value = object / array / string-literal
+   Internet-Drafts are draft documents valid for a maximum of six
+   months and may be updated, replaced, or obsoleted by other documents
+   at any time. It is inappropriate to use Internet- Drafts as
+   reference material or to cite them other than as "work in progress."
 
-## Objects
+1.  Introduction
 
-A JSOND object MUST define all members in the corresponding JSON object.
-A JSON object MUST NOT contain a member that has not been defined in the
-JSOND object.
+   JSOND (JSON Definition) is a simple, yet powerful, definition
+   language for JSON text.
 
-## Arrays
+   The purpose of JSOND is to facilitate development and documentation
+   of JSON text.
 
-A JSOND array MUST define a sequence of values in such way that all
-corresponding JSON array values are defined by at least one of the
-values in the JSOND array.
+   JSOND is designed to be a minimal superset of JSON.
 
-## Booleans
+1.1.  Conventions Used in This Document
 
-A JSOND "boolean" defines that the JSON value MUST be either true or
-false.
+   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
+   document are to be interpreted as described in RFC 2119 [RFC2119].
 
-	string-literal = boolean
-	boolean = %x62.6f.6f.6c.65.61.6e	 ; boolean
+2.  JSOND Grammar
 
-## Strings
+   JSOND text is JSON text that MAY include JSOND grammar. JSOND
+   grammar is a superset of JSON grammar [RFC7159] [RFC4627]
+   [ECMA-404]. The rest of this document describes the JSOND grammar.
 
-A JSOND "string" defines that the JSON value MUST be any string.
+2.1.  Values
 
-	string-literal = string
-	string = %x73.74.72.69.6e.67	     ; string
+   A JSOND value MUST be an object, array or a string.
 
-Regular expressions [ECMA-262] MAY be used to define a subset of strings.
+      value = object / array / string
 
-	string-literal = regular-expression
+2.2.  Objects
 
-## Numbers and Integers
+   A JSOND object MUST define all members in the corresponding JSON
+   object. A JSON object MUST NOT contain a member that has not been
+   defined in the corresponding JSOND object.
 
-A JSOND "number" defines that the JSON value MUST be any number.
+      value = object                           ; e.g. { "a": "string" }
 
-A JSOND "integer" defines that the JSON value MUST be any integer.
+2.3.  Arrays
 
-	string-literal = number / integer
-	number = %x6e.75.6d.62.65.72     ; number
-	integer = %x69.6e.74.65.67.65.72	 ; integer
+   A JSOND array defines zero or more values. All values in a JSON
+   array MUST be defined by at least one of the values in the
+   corresponding JSOND array.
 
-An arbitrary number of mathematical sets and intervals [ISO-80000-2] MAY
-be used to define a subset of numbers.
+      value = array                            ; e.g. [ "string" ]
 
-	string-literal = *( set / interval )
+2.4.  Booleans
 
-	set = begin-object [ number-literal *( value-separator
-number-literal ) ] end-object interval = begin-array / begin-parenthesis
-( ( number-literal
-value-separator ) / ( number-literal value-separator number-literal ) /
-( value-separator number-literal ) ) end-array / end-parenthesis
+   A JSOND boolean defines that the corresponding JSON value MUST be
+   true or false.
 
-	number-literal = integer-literal [ frac ] [ exp ]
-	integer-literal = [minus] zero / ( digit1-9 *DIGIT )
+      value = %x22.62.6f.6f.6c.65.61.6e.22     ; "boolean"
 
-	begin-parenthesis = %x28	 ; (
-	end-parenthesis = %x29   ; )
+2.5.  Strings
 
-Set and interval elements SHOULD be ordered in increasing order from the
-least to the greatest element.
+   A JSOND string defines that the corresponding JSON value MUST be any
+   string.
 
-An interval that is declared using integers defines the corresponding
-subset of integers. An interval MUST be declared using at least one
-number with an explicit decimal component to define a subset of real
-numbers. The decimal component MAY be .0.
+      value = %x22.73.74.72.69.6e.67.22        ; "string"
 
-In an interval the left or right element is OPTIONAL. An undefined left
-element defines negative infinity. An undefined right element defines
-positive infinity.
+   Regular expressions [ECMA-262] MAY be used to define a subset of
+   strings.
 
-Insignificant whitespace MAY be used before, within, between, and after
-sets and intervals.
+      value = %x22 regular-expression %x22     ; e.g. "[a-z]"
 
-## Optionals
+2.4.  Numbers and Integers
 
-A member can be defined as optional by appending the optional-character
-to the end of the JSOND name.
+   A JSOND number defines that the corresponding JSON value MUST be any
+   number.
 
-	name = name [ optional-character ]
-	optional-character = %x3f ; ?
+      value = %x22.6e.75.6d.62.65.72.22        ; "number"
 
-An optional member MAY have the value null. An optional member MAY be
-undefined in JSON text.
+   A JSOND integer defines that the corresponding JSON value MUST be
+   any integer.
 
-### References
+      value = %x22.69.6e.74.65.67.65.72.22     ; "integer"
 
-Any JSOND value MAY be persisted as a file. A file MAY be referenced
-using an relative file path. A file MAY be referenced using an absolute
-path. A file MAY be referenced using the http or https scheme [RFC3986].
+2.4.1  Sets and Intervals
 
-	string-literal = [ scheme ] path
+   An arbitrary number of mathematical sets and intervals [ISO-80000-2]
+   MAY be used to define a subset of numbers.
 
-JSOND files SHOULD have the filename extension .jsond.
+   A corresponding JSON number MUST match a number in the defined
+   subset.
 
-### Constants
+      begin-exclusive = %x28                   ; (
 
-A value that is not valid JSOND grammar SHOULD be interpreted as a value
-constant and thus REQUIRED in JSON text.
+      end-exclusive = %x29                     ; )
 
-Most string literals are valid regular expressions. The values true,
-false, and null are not valid JSOND grammar.
+      integer = [ minus ] zero / ( digit1-9 *DIGIT )
 
-## References
+      number = integer [ frac ] [ exp ]
 
-### Normative References
+      set = begin-object number *( value-separator number ) end-object
 
-- [RFC7159]  Bray, T., "The JavaScript Object Notation (JSON) Data
-  Interchange Format", RFC 7159, March 2014.
-- [RFC5234]  Crocker, D. and P. Overell, "Augmented BNF for Syntax
-  Specifications: ABNF", STD 68, RFC 5234, January 2008.
-- [RFC3986]  Berners-Lee, T., Fielding R., and Masinter, L., "Uniform
-  Resource Identifier (URI): Generic Syntax", RFC 3986, January 2005.
-- [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
-  Requirement Levels", BCP 14, RFC 2119, March 1997.
+      interval = begin-array / begin-exclusive ( ( number
+      value-separator ) / ( number value-separator number ) /
+      ( value-separator number ) ) end-array / end-exclusive
 
-### Informative References
+      value = %x22 1*( set / interval ) %x22   ; e.g. "[1.0,2.0)"
 
-- [ECMA-404]  Ecma International, "The JSON Data Interchange Format",
-  Standard ECMA-404, October 2013,
-<http://www.ecma-international.org/publications/standards/Ecma-404.htm>.
-- [ECMA-262]  Ecma International, "ECMAScript® Language Specification",
-  Standard ECMA-262, June 2011,
-<http://www.ecma-international.org/publications/standards/Ecma-262.htm>.
-- [ISO-80000-2]  International Organization for Standardization,
-  "Quantities and units — Part 2: Mathematical signs and symbols to be
-used in the natural sciences and technology", Standard ISO 80000-2:2009,
-December 2009,
-<http://www.iso.org/iso/home/store/catalogue_tc/catalogue_tc_browse.htm?commid=46202>.
-- [RFC4627]  Crockford, D., "The application/json Media Type for
-  JavaScript Object Notation (JSON)", RFC 4627, July 2006.
+   Set elements SHOULD be ordered in increasing order from the least
+   to the greatest element. There must be at least one element.
 
-## Appendix: Examples
+   The left or right interval endpoint is OPTIONAL. An undefined left
+   endpoint defines negative infinity. An undefined right endpoint
+   defines positive infinity. If both endpoints are provided the left
+   endpoint MUST be less than the right endpoint.
 
-Basic use of JSOND is to use JSOND string literals "boolean", "string",
-"number", and "integer" as values as in Example 1.
+   An interval that is declared using integers defines the
+   corresponding subset of integers. An interval MUST be declared using
+   at least one number with an explicit decimal component to define a
+   subset of real numbers. The decimal component MAY be .0.
 
-```
-[
-	{
-		"id": "integer",
-		"slug": "string",
-		"category": "string",
-		"price": "number",
-		"reduced": "boolean",
-		"url": "string"
-	}
-]
-```
-_Example 1: Basic JSOND that defines a sequence of zero or more
-products._
+   Insignificant whitespace is OPTIONAL in sets and intervals.
 
-Advanced use of JSOND MAY include use of regular expressions,
-mathematical sets and intervals, optionals, references, and constants as
-values as in Example 2.
+2.5.  References
 
-```
-[
-	{
-		"id": "[0,)",
-		"slug": "[a-z0-9]",
-		"category": "{10,25,50}",
-		"price": "(0.0,)",
-		"reduced?": "boolean",
-		"constant": true,
-		"url": "http://jsond.org/url.jsond"
-	}
-]
-``` _Example 2: Advanced JSOND that defines a sequence of zero or more
-products._
+   Any JSOND value MAY be persisted as a file. A file SHOULD be
+   referenced using a relative path, an absolute path, or using the
+   http or https scheme [RFC3986].
 
-Example 2 defines that for each product in the sequence:
+   value = %x22 [ scheme ] path %x22           ; e.g. "file.jsond"
 
-- id MUST be any integer greater than or equal to zero
-- slug MUST only consist of letters a-z and digits 0-9
-- category MUST be either 10, 25, or 50
-- price MUST be any positive number greater than zero
-- reduced MUST be true, false, null or undefined
-- constant MUST be true
-- url is defined by the referenced file url.jsond
+   JSOND files SHOULD have the filename extension .jsond.
 
-The value for url is defined in url.jsond in Example 3.
+   Circular references SHOULD be avoided.
 
-```
-"^https?://[^\.]+\.[a-z]{2,}"
-```
-_Example 3: url.jsond_
+2.6.  Constants
+
+   A value that is not valid JSOND grammar SHOULD be interpreted as a
+   constant and thus REQUIRED in the corresponding JSON text.
+
+   The literals, true, false, and null are not valid JSOND grammar.
+   Numbers are not valid JSOND grammar.
+
+   Most strings are valid regular expressions and thus valid JSOND
+   grammar. String constants SHOULD include boundary matchers.
+
+2.7.  Optionals
+
+   A member can be defined as optional by appending a question mark to
+   the end of the name.
+
+      name = %x22 *char [ %x3f ] %x22          ; e.g. "name?"
+
+   An optional member MAY have the value null. An optional member MAY
+   be undefined in JSON text.
+
+3.  IANA Considerations
+
+   The MIME media type for JSOND text is application/json.
+
+   Type name:  application
+
+   Subtype name:  json
+
+   Required parameters:  n/a
+
+   Optional parameters:  n/a
+
+   Encoding considerations:  binary
+
+   Security considerations:  See [RFC7159], Section 12.
+
+   Interoperability considerations:  Described in [RFC7159]
+
+      Additional information:
+      Magic number(s): n/a
+      File extension(s): .json
+      Macintosh file type code(s): TEXT
+
+4.  Security Considerations
+
+   See Security Considerations in Section 6.
+
+5.  References
+
+5.1.  Normative References
+
+   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", BCP 14, RFC 2119, March 1997.
+
+   [RFC3986]  Berners-Lee, T., Fielding R., and Masinter, L., "Uniform
+              Resource Identifier (URI): Generic Syntax", RFC 3986,
+              January 2005.
+
+   [RFC5234]  Crocker, D. and P. Overell, "Augmented BNF for Syntax
+              Specifications: ABNF", STD 68, RFC 5234, January 2008.
+
+   [RFC7159]  Bray, T., "The JavaScript Object Notation (JSON) Data
+              Interchange Format", RFC 7159, March 2014.
+
+5.2.  Informative References
+
+   [ECMA-404] Ecma International, "The JSON Data Interchange Format",
+              Standard ECMA-404, October 2013, <http://www.ecma-
+              international.org/publications/standards/Ecma-404.htm>.
+
+   [ECMA-262] Ecma International, "ECMAScript® Language Specification",
+              Standard ECMA-262, June 2011, <http://www.ecma-
+              international.org/publications/standards/Ecma-262.htm>.
+
+   [ISO-80000-2] International Organization for Standardization,
+                 "Quantities and units — Part 2: Mathematical signs and
+                 symbols to be used in the natural sciences and
+                 technology", Standard ISO 80000-2:2009, December 2009,
+                 <http://www.iso.org/iso/home/store/catalogue_tc/
+                 catalogue_tc_browse.htm?commid=46202>.
+
+   [RFC4627]  Crockford, D., "The application/json Media Type for
+              JavaScript Object Notation (JSON)", RFC 4627, July 2006.
+
+Appendix A.  Examples
+
+   Example 1:
+
+   [
+      {
+         "id": "integer",
+         "slug": "string",
+         "url": "string"
+         "category": "integer",
+         "price": "number",
+         "reduced": "boolean",
+      }
+   ]
+
+   Example 2:
+
+   [
+      {
+         "id": "[0,)",
+         "slug": "[a-z0-9]",
+         "url": "url.jsond"
+         "category": "{10,25,50}",
+         "price": "(0.0,)",
+         "reduced?": "boolean",
+         "margin": "(high|medium|low)",
+         "available": true,
+      }
+   ]
+
+Author's Address
+
+   D. Oskarsson
+   Satuna Vekabacken
+   SE-541 94
+   SWEDEN
+
+   Email: daniel@jsond.org
