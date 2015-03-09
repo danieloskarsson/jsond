@@ -78,7 +78,7 @@ A corresponding JSON number MUST match a number in the defined subset.
 
 	interval = begin-array / begin-exclusive ( ( number value-separator ) / ( number value-separator number ) / ( value-separator number ) ) end-array / end-exclusive
 
-	value = %x22 ( set / interval ) *( set / interval ) %x22
+	value = %x22 1*( set / interval ) %x22
 
 Set elements SHOULD be ordered in increasing order from the least to the greatest element. There must be at least one element.
 
