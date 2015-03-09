@@ -190,7 +190,7 @@ Internet-Draft                   JSOND                        March 2015
 
 2.5.  References
 
-   Any JSOND value MAY be persisted as a file. A file SHOULD be
+   Any JSOND value MAY be persisted as a file.  A file SHOULD be
    referenced using a relative path, an absolute path, or using the
    http or https scheme [RFC3986].
 
@@ -218,7 +218,7 @@ Internet-Draft                   JSOND                        March 2015
 
       name = %x22 *char [ %x3f ] %x22          ; e.g. "name?"
 
-   An optional member MAY have the value null. An optional member MAY
+   An optional member MAY have the value null.  An optional member MAY
    be undefined in JSON text.
 
 
