@@ -18,7 +18,7 @@ JSOND text is JSON text that MAY include JSOND grammar. JSOND grammar is a super
 
 ## Values
 
-A JSOND value MUST be any JSON object, array or string.
+A JSOND value MUST be an object, array or a string.
 
 	value = object / array / string
 
