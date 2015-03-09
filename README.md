@@ -82,9 +82,9 @@ A corresponding JSON number MUST match a number in the defined subset.
 
 Set elements SHOULD be ordered in increasing order from the least to the greatest element. There must be at least one element.
 
-An interval that is declared using integers defines the corresponding subset of integers. An interval MUST be declared using at least one number with an explicit decimal component to define a subset of real numbers. The decimal component MAY be `.0`.
-
 In an interval the left or right endpoint is OPTIONAL. An undefined left endpoint defines negative infinity. An undefined right endpoint defines positive infinity. If both endpoints are provided the left  endpoint MUST be less than the right endpoint.
+
+An interval that is declared using integers defines the corresponding subset of integers. An interval MUST be declared using at least one number with an explicit decimal component to define a subset of real numbers. The decimal component MAY be `.0`.
 
 Insignificant whitespace is OPTIONAL in sets and intervals.
 
