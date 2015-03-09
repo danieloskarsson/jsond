@@ -105,7 +105,7 @@ JSOND files SHOULD have the filename extension .jsond.
 
 ## Constants
 
-A value that is not valid JSOND grammar SHOULD be interpreted as a value constant and thus REQUIRED in the corresponding JSON text.
+A value that is not valid JSOND grammar SHOULD be interpreted as a constant and thus REQUIRED in the corresponding JSON text.
 
 The literals, true, false, and null are not valid JSOND grammar. Numbers are not valid JSOND grammar.
 
