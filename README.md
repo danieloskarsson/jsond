@@ -87,16 +87,6 @@ In an interval the left or right endpoint is OPTIONAL. An undefined left endpoin
 
 Insignificant whitespace is OPTIONAL in sets and intervals.
 
-## Optionals
-
-A member can be defined as optional by appending the optional-character to the end of the JSOND name.
-
-	optional-character = %x3f                ; ?
-
-	name = name [ optional-character ]       ; e.g. name?
-
-An optional member MAY have the value null. An optional member MAY be undefined in JSON text.
-
 ## References
 
 Any JSOND value MAY be persisted as a file. A file SHOULD be referenced using a relative path, an absolute path, or using the http or https scheme [RFC3986].
@@ -112,6 +102,16 @@ A value that is not valid JSOND grammar SHOULD be interpreted as a constant and 
 The literals, true, false, and null are not valid JSOND grammar. Numbers are not valid JSOND grammar.
 
 Most strings are valid regular expressions and thus valid JSOND grammar. String constants SHOULD include boundary matchers.
+
+## Optionals
+
+A member can be defined as optional by appending the optional-character to the end of the JSOND name.
+
+	optional-character = %x3f                ; ?
+
+	name = name [ optional-character ]       ; e.g. name?
+
+An optional member MAY have the value null. An optional member MAY be undefined in JSON text.
 
 # References
 
