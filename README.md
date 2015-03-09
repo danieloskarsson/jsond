@@ -30,7 +30,7 @@ A JSOND object MUST define all members in the corresponding JSON object. A JSON 
 
 ## Arrays
 
-A JSOND array MUST define a sequence of values in such way that all corresponding JSON array values are defined by at least one of the values in the JSOND array.
+A JSOND array defines zero or more values. All values in a JSON array MUST be defined by at least one of the values in the corresponding JSOND array.
 
 	value = array                            ; e.g. [ "boolean", "string" ]
 
