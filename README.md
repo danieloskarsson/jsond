@@ -70,8 +70,8 @@ An arbitrary number of mathematical sets and intervals [ISO-80000-2] MAY be used
 
 	set = begin-object number *( value-separator number ) end-object
 
-	begin-exclusive = %x28          ; (
-	end-exclusive = %x29            ; )
+	begin-exclusive = %x28                   ; (
+	end-exclusive = %x29                     ; )
 
 	interval = begin-array / begin-exclusive ( ( number value-separator ) / ( number value-separator number ) / ( value-separator number ) ) end-array / end-exclusive
 
