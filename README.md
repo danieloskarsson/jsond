@@ -108,7 +108,7 @@ Most strings are valid regular expressions and thus valid JSOND grammar. String 
 
 ## Optionals
 
-A member can be defined as optional by appending a question mark to the end of the JSOND name.
+A member can be defined as optional by appending a question mark to the end of the name.
 
 	name = %x22 *char [ %x3f ] %x22          ; e.g. "name?"
 
