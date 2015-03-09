@@ -64,6 +64,8 @@ A JSOND integer defines that the corresponding JSON value MUST be any integer.
 
 An arbitrary number of mathematical sets and intervals [ISO-80000-2] MAY be used to define a subset of numbers.
 
+A corresponding JSON number MUST match a number in the defined subset.
+
 	integer = [ minus ] zero / ( digit1-9 *DIGIT )
 
 	number = integer [ frac ] [ exp ]
