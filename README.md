@@ -66,14 +66,15 @@ An arbitrary number of mathematical sets and intervals [ISO-80000-2] MAY be used
 
 A corresponding JSON number MUST match a number in the defined subset.
 
+	begin-exclusive = %x28                   ; (
+
+	end-exclusive = %x29                     ; )
+
 	integer = [ minus ] zero / ( digit1-9 *DIGIT )
 
 	number = integer [ frac ] [ exp ]
 
 	set = begin-object number *( value-separator number ) end-object
-
-	begin-exclusive = %x28                   ; (
-	end-exclusive = %x29                     ; )
 
 	interval = begin-array / begin-exclusive ( ( number value-separator ) / ( number value-separator number ) / ( value-separator number ) ) end-array / end-exclusive
 
