@@ -3,7 +3,6 @@
 
 
 
-
 Internet Engineering Task Force                             D. Oskarsson
 Internet-Draft                                                 JSOND.org
 Intended status: Informational                             March 9, 2015
@@ -11,34 +10,55 @@ Expires: August 5, 2015
 
             JavaScript Object Notation Definition (JSOND) 
 
+                     draft-oskarsson-jsond-00
+
 Abstract
 
    JSOND (JSON Definition) is a simple, yet powerful, definition
    language for JSON text.
 
+Status of this Memo
+
+   This Internet-Draft is submitted in full conformance with the
+   provisions of BCP 78 and BCP 79.
+
+   Internet-Drafts are working documents of the Internet Engineering
+   Task Force (IETF).  Note that other groups may also distribute
+   working documents as Internet-Drafts.  The list of current Internet-
+   Drafts is at http://datatracker.ietf.org/drafts/current/.
+
+   Internet-Drafts are draft documents valid for a maximum of six months
+   and may be updated, replaced, or obsoleted by other documents at any
+   time.  It is inappropriate to use Internet-Drafts as reference
+   material or to cite them other than as "work in progress."
+
+   This Internet-Draft will expire on February 1, 2011.
+
 Copyright Notice
 
    Copyright (c) 2015 IETF Trust and the persons identified as the
-   document authors. All rights reserved.
+   document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
    Provisions Relating to IETF Documents
    (http://trustee.ietf.org/license-info) in effect on the date of
-   publication of this document. Please review these documents
-   carefully, as they describe your rights and restrictions with
-   respect to this document."
+   publication of this document.  Please review these documents
+   carefully, as they describe your rights and restrictions with respect
+   to this document.  Code Components extracted from this document must
+   include Simplified BSD License text as described in Section 4.e of
+   the Trust Legal Provisions and are provided without warranty as
+   described in the Simplified BSD License.
 
-   This Internet-Draft is submitted in full conformance with the
-   provisions of BCP 78 and BCP 79. Internet-Drafts are working
-   documents of the Internet Engineering Task Force (IETF). Note that
-   other groups may also distribute working documents as Internet-
-   Drafts. The list of current Internet-Drafts is at
-   http://datatracker.ietf.org/drafts/current.
 
-   Internet-Drafts are draft documents valid for a maximum of six
-   months and may be updated, replaced, or obsoleted by other documents
-   at any time. It is inappropriate to use Internet- Drafts as
-   reference material or to cite them other than as "work in progress."
+
+
+
+
+
+Oskarsson                Expires August 5, 2015                 [Page 1]
+
+Internet-Draft                   JSOND                        March 2015
+
 
 1.  Introduction
 
@@ -55,16 +75,12 @@ Copyright Notice
    The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
    "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
    document are to be interpreted as described in RFC 2119 [RFC2119].
-
-Oskarsson                Expires August 5, 2015                 [Page 1]
-
-Internet-Draft                   JSOND                        March 2015
-
 2.  JSOND Grammar
 
    JSOND text is JSON text that MAY include JSOND grammar. JSOND
    grammar is a superset of JSON grammar [RFC7159] [RFC4627]
-   [ECMA-404]. The rest of this document describes the JSOND grammar.
+   [ECMA-404].  The rest of this document describes the JSOND grammar
+   in ABNF [RFC5234] and text.
 
 2.1.  Values
 
@@ -75,14 +91,14 @@ Internet-Draft                   JSOND                        March 2015
 2.2.  Objects
 
    A JSOND object MUST define all members in the corresponding JSON
-   object. A JSON object MUST NOT contain a member that has not been
+   object.  A JSON object MUST NOT contain a member that has not been
    defined in the corresponding JSOND object.
 
       value = object                           ; e.g. { "a": "string" }
 
 2.3.  Arrays
 
-   A JSOND array defines zero or more values. All values in a JSON
+   A JSOND array defines zero or more values.  All values in a JSON
    array MUST be defined by at least one of the values in the
    corresponding JSOND array.
 
@@ -94,6 +110,13 @@ Internet-Draft                   JSOND                        March 2015
    true or false.
 
       value = %x22.62.6f.6f.6c.65.61.6e.22     ; "boolean"
+
+
+
+Oskarsson                Expires August 5, 2015                 [Page 2]
+
+Internet-Draft                   JSOND                        March 2015
+
 
 2.5.  Strings
 
@@ -113,10 +136,6 @@ Internet-Draft                   JSOND                        March 2015
    number.
 
       value = %x22.6e.75.6d.62.65.72.22        ; "number"
-
-Oskarsson                Expires August 5, 2015                 [Page 2]
-
-Internet-Draft                   JSOND                        March 2015
 
    A JSOND integer defines that the corresponding JSON value MUST be
    any integer.
@@ -148,17 +167,24 @@ Internet-Draft                   JSOND                        March 2015
       value = %x22 1*( set / interval ) %x22   ; e.g. "[1.0,2.0)"
 
    Set elements SHOULD be ordered in increasing order from the least
-   to the greatest element. There must be at least one element.
+   to the greatest element.  There must be at least one element.
 
-   The left or right interval endpoint is OPTIONAL. An undefined left
-   endpoint defines negative infinity. An undefined right endpoint
-   defines positive infinity. If both endpoints are provided the left
+
+
+Oskarsson                Expires August 5, 2015                 [Page 3]
+
+Internet-Draft                   JSOND                        March 2015
+
+
+   The left or right interval endpoint is OPTIONAL.  An undefined left
+   endpoint defines negative infinity.  An undefined right endpoint
+   defines positive infinity.  If both endpoints are provided the left
    endpoint MUST be less than the right endpoint.
 
    An interval that is declared using integers defines the
-   corresponding subset of integers. An interval MUST be declared using
+   corresponding subset of integers.  An interval MUST be declared using
    at least one number with an explicit decimal component to define a
-   subset of real numbers. The decimal component MAY be .0.
+   subset of real numbers.  The decimal component MAY be .0.
 
    Insignificant whitespace is OPTIONAL in sets and intervals.
 
@@ -170,12 +196,9 @@ Internet-Draft                   JSOND                        March 2015
 
    value = %x22 [ scheme ] path %x22           ; e.g. "file.jsond"
 
-   JSOND files SHOULD have the filename extension .jsond. Circular
+
+   JSOND files SHOULD have the filename extension .jsond.  Circular
    references SHOULD be avoided.
-
-Oskarsson                Expires August 5, 2015                 [Page 3]
-
-Internet-Draft                   JSOND                        March 2015
 
 2.6.  Constants
 
@@ -186,7 +209,7 @@ Internet-Draft                   JSOND                        March 2015
    Numbers are not valid JSOND grammar.
 
    Most strings are valid regular expressions and thus valid JSOND
-   grammar. String constants SHOULD include boundary matchers.
+   grammar.  String constants SHOULD include boundary matchers.
 
 2.7.  Optionals
 
@@ -197,6 +220,19 @@ Internet-Draft                   JSOND                        March 2015
 
    An optional member MAY have the value null. An optional member MAY
    be undefined in JSON text.
+
+
+
+
+
+
+
+
+
+Oskarsson                Expires August 5, 2015                 [Page 4]
+
+Internet-Draft                   JSOND                        March 2015
+
 
 3.  IANA Considerations
 
@@ -228,20 +264,16 @@ Internet-Draft                   JSOND                        March 2015
 
 5.2.  Informative References
 
-Oskarsson                Expires August 5, 2015                 [Page 4]
-
-Internet-Draft                   JSOND                        March 2015
-
    [ECMA-404] Ecma International, "The JSON Data Interchange Format",
               Standard ECMA-404, October 2013, <http://www.ecma-
               international.org/publications/standards/Ecma-404.htm>.
 
-   [ECMA-262] Ecma International, "ECMAScript® Language Specification",
+   [ECMA-262] Ecma International, "ECMAScript Language Specification",
               Standard ECMA-262, June 2011, <http://www.ecma-
               international.org/publications/standards/Ecma-262.htm>.
 
    [ISO-80000-2] International Organization for Standardization,
-                 "Quantities and units — Part 2: Mathematical signs and
+                 "Quantities and units - Part 2: Mathematical signs and
                  symbols to be used in the natural sciences and
                  technology", Standard ISO 80000-2:2009, December 2009,
                  <http://www.iso.org/iso/home/store/catalogue_tc/
@@ -249,6 +281,16 @@ Internet-Draft                   JSOND                        March 2015
 
    [RFC4627]  Crockford, D., "The application/json Media Type for
               JavaScript Object Notation (JSON)", RFC 4627, July 2006.
+
+
+
+
+
+
+Oskarsson                Expires August 5, 2015                 [Page 5]
+
+Internet-Draft                   JSOND                        March 2015
+
 
 Appendix A.  Examples
 
@@ -282,9 +324,26 @@ Appendix A.  Examples
 
 Author's Address
 
-   D. Oskarsson
+   Daniel Oskarsson
    Satuna Vekabacken
    SE-541 94
    SWEDEN
 
    Email: daniel@jsond.org
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Oskarsson                Expires August 5, 2015                 [Page 5]
+
