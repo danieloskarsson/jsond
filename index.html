@@ -61,8 +61,10 @@ footer {
 <body>
 <br>
 <h1>JSOND</h1>
-<h2>Introduction</h2><p>JSOND (JSON Definition) is a natural way of defining JSON using JSON.</p>
-<p>The purpose of JSOND is to be able to articulate JSON text without example values. JSOND is a superset of JSON so JSOND text have the same structure as the JSON text defined.</p>
+<h2>Introduction</h2><p>JSOND (JSON Definition) is a simple, yet powerful, definition language for JSON text.</p>
+<p>The purpose of JSOND is to facilitate development and documentation
+   of JSON text. JSOND is designed to be a minimal superset of JSON.</p>
+   <p>JSOND text have the same structure as the JSON text defined.</p>
 <h2>JSON Basics</h2>
 <p>Let's recap JSON basics. JSON is built on two structures:</p>
 <ul><li>An ordered list of values (array)</li><li>A unordered set of name/value pairs (object)</li></ul>
@@ -70,85 +72,83 @@ footer {
 <ul><li>object</li><li>array</li><li>string</li><li>number</li><li>true</li><li>false</li><li>null</li></ul>
 
 <h2>JSOND Basics</h2>
-<p>It's simple to use JSOND. Simply write JSON as normal. Instead of example values, use a string literal to define the value type.</p>
+<p>It's easy to start using JSOND. Simply write JSON as normal using objects and arrays. Instead of example values, use one of the following string literals:</p>
+<ul><li>boolean</li><li>string</li><li>number</li><li>integer</li></ul>
 
-<h2><a href="value.html">JSOND Values<a/></h2>
-<p>When used as a value, JSOND defines four string literals with a special meaning.</p>
-<h3>"boolean"</h3><p>A JSOND value "boolean" defines that the JSON value must be either true or false.</p>
-<h3>"string"</h3><p>A JSOND value "string" defines that the JSON value must be a string.</p>
+<h2><a href="value.html">Values<a/></h2>
+<h3>"boolean"</h3><p>A JSOND value "boolean" defines that the corresponding JSON value must be either true or false.</p>
+<h3>"string"</h3><p>A JSOND value "string" defines that the corresponding JSON value must be a string.</p>
 <p>The string can be more specifically defined using a regular expression.</p>
-<pre><code>"^(red|green|blue)$"</code></pre>
-<p><em>Defines that the JSON value must be either "red", "green" or "blue".</em></p>
-<h3>"number"</h3><p>A JSOND value "number" defines that the JSON value must be a number.</p>
-<p>The number can be more specifically defined using the set or interval notation.</p>
+<pre><code>"[a-z]"</code></pre>
+<p><em>Defines that the JSON value can only consist of the characters a to z.</em></p>
+<h3>"number"</h3><p>A JSOND value "number" defines that the corresponding JSON value must be a number.</p>
+<p>The number can be more specifically defined with a mathematical set or interval.</p>
 <pre><code>"{1.5,2.4,4.8}"</code></pre>
 <p><em>Defines that the JSON value must be 1.5, 2.4, or 4.8.</em></p>
-<pre><code>"[1,4)"</code></pre>
-<p><em>Defines that the JSON value must be a number greater than or equal to 1, and less than 4.</em></p>
-<h3>"integer"</h3><p>A JSOND value "integer" defines that the JSON value must be an integer,<br>i.e. a number without a decimal component.</p>
-<p>The integer can be more specifically defined using the set or interval notation.</p>
+<pre><code>"[1.0,4.0)"</code></pre>
+<p><em>Defines that the JSON value must be a number greater than or equal to 1.0, and less than 4.0.</em></p>
+<h3>"integer"</h3><p>A JSOND value "integer" defines that the corresponding JSON value must be an integer,<br>i.e. a number without a decimal component.</p>
+<p>The integer can be more specifically defined with a mathematical set or interval.</p>
 <pre><code>"{1,2,4}"</code></pre>
 <p><em>Defines that the JSON value must be 1, 2, or 4.</em></p>
 <pre><code>"[1,4)"</code></pre>
 <p><em>Defines that the JSON value must be an integer greater than or equal to 1, and less than 4.</em></p>
 
-<h2>JSOND References</h2>
-<p>JSOND text can be persisted as a .jsond file. A JSOND file can be referenced using the http or file URI scheme as the JSOND value.</p>
+<h2>References</h2>
+<p>JSOND text can be persisted as a .jsond file. A JSOND file can be referenced using the http scheme or a filepath as the JSOND value.</p>
 <pre><code>"http://jsond.org/utc.jsond"</code></pre>
 <p><em>Defines that the JSON value must be a string with the format "yyyy-mm-ddThh:mm:ssZ" with optional fractions of the second as defined in http://jsond.org/utc.jsond.</em></p>
 
-<h2><a href="name.html">JSOND Names</a></h2>
-<p>When a name ends with a question mark, JSOND defines that in addition to the value type or value definition the value may also be null or the name/value pair may not be in the JSON text.
+<h2><a href="name.html">Optionals</a></h2>
+<p>A name/value pair may be marked as optional by appending a question mark to the name. Optional name/value pairs may have the value null. Optional name/value pairs are not required to be in the corresponding JSON text.
 <pre><code>"age?"</code></pre>
 <p><em>Defines that the JSON value may be null and that the JSON name/value pair may not be in the JSON text.</em></p>
 
 <h2>A. Examples</h2>
 
-Example 1 defines a person with a required first and last name and a optional age that if given must have a value that is an integer larger than or equal to 0.
+Example 1 defines a person with a required first and last name and a optional age that if given must have a value that is an integer larger than or equal to 18.
 <pre><code>{
     "firstName": "string",
-    "lastName": "string",
-    "age?": "[0,"
+     "lastName": "string",
+         "age?": "[18,)"
 }
 </code></pre>
 <h4>EXAMPLE 1: PERSON</h4>
 
 Example 2 defines a product with a required id, name and price that is larger than 0 and a optional array of strings named tags.
 <pre><code>{
-    "id": "integer",
-    "name": "string",
-    "price": "(0.0",
-    "tags?": [
-        "string"
-    ]
+       "id": "integer",
+     "name": "string",
+    "price": "(0.0,)",
+    "tags?": [ "string" ]
 }
 </code></pre>
 <h4>EXAMPLE 2: PRODUCT</h4>
-JSOND is designed to be a minimal language and does not provide a way to require unique items or a certain number of items in a array.
-<br><br>
-Example 3 defines a array of products. A product is defines with a required id, name and price, a optional array of strings named tags, a optional dimensions object and a optional warehouse location. The definition of a warehouse location is found in the refrenced file coordinates.jsond.
+Example 3 defines a array of products. A product is defines with a required id, name and price, a optional array of strings named tags, a optional dimensions object and a optional warehouse location. The definition of a warehouse location is found in the referenced file coordinates.jsond.
 <pre><code>[
     {
-        "id": "integer",
-        "name": "string",
-        "price": "(0",
-        "tags?": [
-            "string"
-        ],
+           "id": "integer",
+         "name": "string",
+        "price": "(0.0,)",
+        "tags?": [ "string" ],
         "dimensions?": {
-            "length": "number",
-            "width": "number",
-            "height": "number"
+             "length": "number",
+              "width": "number",
+             "height": "number"
         },
         "warehouseLocation?": "http://jsond.org/coordinates.jsond"
     }
 ]
 </code></pre>
 <h4>EXAMPLE 3: ARRAY OF PRODUCTS</h4>
+<!--
+JSOND is designed to be a minimal language and does not provide a way to require unique items or a certain number of items in a array.
+<br><br>
+-->
 Example 4 defines coordinates.jsond references in Example 3.
 
 <pre><code>{
-    "latitude": "number",
+     "latitude": "number",
     "longitude": "number"
 }
 </code></pre>
@@ -208,7 +208,7 @@ Choice(0,']',')')
 <div>
 <script >
 Diagram(
-Sequence(Choice(0,Skip(),Terminal('file://'),Terminal('http://')),Choice(0,NonTerminal('path'),Skip()),NonTerminal('name'),Terminal('.jsond'))
+Sequence(Choice(0,Skip(),Terminal('http://')),Choice(0,NonTerminal('path'),Skip()),NonTerminal('file'),Terminal('.jsond'))
 ).addTo();
 </script>
 <h4 id='ident'>FIGURE 4: REFERENCE</h1>
@@ -217,12 +217,12 @@ Sequence(Choice(0,Skip(),Terminal('file://'),Terminal('http://')),Choice(0,NonTe
 <div>
 <script >
 Diagram(
-NonTerminal('string'),
+NonTerminal('name'),
 Choice(0,Skip(), '?')
 )
 .addTo();
 </script>
-<h4 id='ident'>FIGURE 5: NAME</h4>
+<h4 id='ident'>FIGURE 5: OPTIONAL</h4>
 </div>
 
 <!--
@@ -230,8 +230,9 @@ Choice(0,Skip(), '?')
 <sup id="fn1">1. It's that simple.</a></sup><br>
 <sup id="fn1">2. <a href="#ref1" title="Jump back to footnote 1 in the text.">Syntax Diagram: name.svg</a></sup><br>
 <sup id="fn1">3. <a href="#ref1" title="Jump back to footnote 1 in the text.">More examples are available at <a href="examples.html" style="text-decoration:underline;">examples.html</a></sup><br>
-<br><br><br><footer>JSOND.org &mdash; 2014-10-11 17:23 UTC</footer>
 -->
+<br><br><br><footer><a href="https://datatracker.ietf.org/doc/draft-oskarsson-jsond/?include_text=1" style="background-color:#CD7664;padding:5px">RFC-draft: https://datatracker.ietf.org/doc/draft-oskarsson-jsond/</a>
+</footer><br>
 
 </body>
 </html>
