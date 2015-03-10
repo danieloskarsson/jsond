@@ -8,9 +8,9 @@ Internet-Draft                                                 JSOND.org
 Intended status: Informational                             March 9, 2015
 Expires: August 5, 2015
 
-            JavaScript Object Notation Definition (JSOND) 
+                       JSON Definition (JSOND) 
 
-                     draft-oskarsson-jsond-01
+                       draft-oskarsson-jsond-01
 
 Abstract
 
